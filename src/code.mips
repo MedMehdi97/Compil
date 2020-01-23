@@ -1,0 +1,23 @@
+.data
+ln : 	.asciiz "\n"
+
+.text
+main :
+
+#Instruction Ecrire 
+li $v0, 1
+li $a0, 10 
+syscall
+#Instruction Ecrire 
+li $v0, 1
+li $a0, 11 
+syscall
+#Instruction Ecrire 
+li $v0, 1
+li $a0, 4 
+syscall
+
+end :
+
+li $v0, 10
+syscall 

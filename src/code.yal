@@ -1,7 +1,6 @@
 programme test debut
 entier a;
 entier b;
-entier c;
-ecrire 2;
-entier d;
+lire b;
+lire a;
 fin

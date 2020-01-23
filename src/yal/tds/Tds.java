@@ -64,19 +64,19 @@ public class Tds {
      * @return
      */
     public Symbole identifier (Entree e){
-        if (!table.containsKey(e)) {
-            throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée");
+        for (Entree en: table.keySet()){
+            if (en.getNom().equals(e.getNom())){
+                return table.get(en);
+            }
         }
-        else {
-            return this.table.get(e);
-        }
+        throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée");
     }
 
     /**
      * @return Le deplacement necessaire pour definir toutes nos variables.
      */
     public int getTailleZoneVariable() {
-        return this.cptDepl*4;
+        return this.cptDepl*(-4);
     }
 
 

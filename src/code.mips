@@ -10,14 +10,16 @@ move $s7,$sp
 addi $sp, $sp, -4
  # reservation de l'espace pour une variable
 addi $sp, $sp, -4
- # reservation de l'espace pour une variable
-addi $sp, $sp, -4
-#Instruction Ecrire 
-li $v0, 1
-li $a0, 2 
+#Instruction Lecture
+li $v0, 5
 syscall
- # reservation de l'espace pour une variable
-addi $sp, $sp, -4
+#Empiler la variable
+sw $v0, -4($s7)
+#Instruction Lecture
+li $v0, 5
+syscall
+#Empiler la variable
+sw $v0, 0($s7)
 
 end :
 

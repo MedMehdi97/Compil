@@ -28,7 +28,7 @@ public class Yal {
             flot.println(arbre.toMIPS());
             flot.println("end :\n\n" +"li $v0, 10\n" +"syscall ");//fin du programme MIPS
             flot.close() ;
-            Tds.getInstance().afficheTable();
+            //Tds.getInstance().afficheTable();
         }
         catch (FileNotFoundException ex) {
             System.err.println("Fichier " + nomFichier + " inexistant") ;

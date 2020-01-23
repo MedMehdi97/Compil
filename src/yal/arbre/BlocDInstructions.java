@@ -28,6 +28,9 @@ public class BlocDInstructions extends ArbreAbstrait {
 
     @Override
     public void verifier() {
+        for (ArbreAbstrait ab: programme) { // vérification sémantique de chaque arbre
+            ab.verifier();
+        }
     }
     
     @Override

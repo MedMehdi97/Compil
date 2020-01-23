@@ -7,7 +7,7 @@ import yal.tds.symbole.Symbole;
 public class Idf extends Expression {
     private String nom;
     private int deplacement;
-    protected Idf(int n, String nom) {
+    public Idf(int n, String nom) {
         super(n);
         this.nom=nom;
     }
@@ -22,6 +22,7 @@ public class Idf extends Expression {
     @Override
     public String toMIPS() {
         StringBuilder code=new StringBuilder("");
+        code.append(this.deplacement); //recupération du déplacement dans la pile
         return code.toString();
     }
 }

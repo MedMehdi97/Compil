@@ -40,6 +40,13 @@ abstract class Instruction {
 }
 
 Instruction -up-|> ArbreAbstrait
+class Declarer {
+   Declarer(int n, String nom, EntreeVariable e)
+   void verifier()
+   String toMIPS()
+}
+Declarer  -up-|> Instruction
+
 class Ecrire {
    Ecrire(int n)
    void verifier()
@@ -47,6 +54,8 @@ class Ecrire {
 }
 
 Ecrire  -up-|> Instruction
+
+
 
 abstract class Expression {
    protected Expression(int n)
@@ -62,6 +71,7 @@ abstract class Constante {
 }
 
 Constante  -up-|> Expression
+Idf  -up-|> Expression
 
 class ConstanteEntiere {
    ConstanteEntiere(String texte, int n)
@@ -69,4 +79,39 @@ class ConstanteEntiere {
 }
 
 ConstanteEntiere  -up-|> Constante
+class Idf {
+   Idf(int n, String nom)
+   void verifier()
+   String toMIPS()
+}
+
+abstract class Entree {
+   String nom
+   int noLigne
+}
+
+abstract class Symbole {
+   int getDeplacement()
+}
+
+class EntreeVariable {
+   EntreeVariable(String n, int l)
+}
+EntreeVariable  -up-|> Entree
+
+class SymboleVariable {
+   int dep
+   SymboleVariable(int dep)
+}
+SymboleVariable  -up-|> Symbole
+class Tds << (S,#FF7700) Singleton >>{
+int cptDepl
+Tds()
+Tds getInstance()
+void ajouter(Entree e, Symbole s)
+Symbole identifier(Entree e)
+int getTailleZoneVariable()
+}
+Tds -up- "*" Entree
+Tds -up- "*" Symbole
 @enduml

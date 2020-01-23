@@ -4,18 +4,20 @@ ln : 	.asciiz "\n"
 .text
 main :
 
+move $s7,$sp
+
+ # reservation de l'espace pour une variable
+addi $sp, $sp, -4
+ # reservation de l'espace pour une variable
+addi $sp, $sp, -4
+ # reservation de l'espace pour une variable
+addi $sp, $sp, -4
 #Instruction Ecrire 
 li $v0, 1
-li $a0, 10 
+li $a0, 2 
 syscall
-#Instruction Ecrire 
-li $v0, 1
-li $a0, 11 
-syscall
-#Instruction Ecrire 
-li $v0, 1
-li $a0, 4 
-syscall
+ # reservation de l'espace pour une variable
+addi $sp, $sp, -4
 
 end :
 

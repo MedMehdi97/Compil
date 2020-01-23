@@ -1,34 +1,27 @@
 package yal.arbre.expressions;
 
+import yal.tds.Tds;
+import yal.tds.entree.EntreeVariable;
+import yal.tds.symbole.Symbole;
+
 public class Idf extends Expression {
     private String nom;
-    private String deplacement;
-    protected Idf(int n) {
+    private int deplacement;
+    protected Idf(int n, String nom) {
         super(n);
+        this.nom=nom;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getDeplacement() {
-        return deplacement;
-    }
-
-    public void setDeplacement(String deplacement) {
-        this.deplacement = deplacement;
-    }
 
     @Override
     public void verifier() {
+        Symbole s = Tds.getInstance().identifier(new EntreeVariable(this.nom, this.getNoLigne()));
+        this.deplacement = s.getDeplacement();
     }
 
     @Override
     public String toMIPS() {
-        return null;
+        StringBuilder code=new StringBuilder("");
+        return code.toString();
     }
 }

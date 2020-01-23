@@ -43,6 +43,7 @@ espace = {finDeLigne}  | [ \t\f]
 "programme"            { return symbol(CodesLexicaux.PROGRAMME); }
 "debut"                { return symbol(CodesLexicaux.DEBUT); }
 "fin"              	   { return symbol(CodesLexicaux.FIN); }
+"entier"               { return symbol(CodesLexicaux.ENTIER); }
 
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
 
@@ -53,5 +54,6 @@ espace = {finDeLigne}  | [ \t\f]
 {idf}      	           { return symbol(CodesLexicaux.IDF, yytext()); }
 
 {espace}               { }
+
 .                      { throw new AnalyseLexicaleException(yyline, yycolumn, yytext()) ; }
 

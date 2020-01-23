@@ -14,6 +14,6 @@ public class SymboleVariable extends Symbole {
 
     @Override
     public int getDeplacement() {
-        return 0;
+        return this.dep;
     }
 }

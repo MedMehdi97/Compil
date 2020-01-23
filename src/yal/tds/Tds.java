@@ -1,6 +1,8 @@
 package yal.tds;
 
 import yal.exceptions.AnalyseSemantiqueException;
+import yal.exceptions.DoubleDeclarationException;
+import yal.exceptions.VariableNonDeclareeException;
 import yal.tds.entree.Entree;
 import yal.tds.symbole.Symbole;
 
@@ -46,18 +48,14 @@ public class Tds {
      * @param e
      * @param s
      */
-    public void ajouter(Entree e, Symbole s){
-         //Vérification de la double déclation à faire
-        if(!table.containsValue(e)){ //Si la table ne contient pas encore l'entrée alors
-            try {
-                this.table.put(e, s); //ajouter l'entrée et le symbole à la table
-            } catch (AnalyseSemantiqueException ase)  {
-                throw ase;
+    public void ajouter(Entree e, Symbole s)throws DoubleDeclarationException {
+        for (Entree e1: this.table.keySet()){
+            if (e.getNom().equals(e1.getNom())){
+                throw new DoubleDeclarationException(e.getLigne(),"Variable déja déclaré");
             }
         }
-        else {
-            throw new AnalyseSemantiqueException(e.getLigne(), " Double déclaration de la variable "+ e.getNom());
-        }
+        this.table.put(e,s);
+        this.cptDepl+=1;
     }
 
     /**
@@ -66,13 +64,28 @@ public class Tds {
      * @return
      */
     public Symbole identifier (Entree e){
-        return table.get(e);
+        if (!table.containsKey(e)) {
+            throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée");
+        }
+        else {
+            return this.table.get(e);
+        }
     }
 
     /**
      * @return Le deplacement necessaire pour definir toutes nos variables.
      */
     public int getTailleZoneVariable() {
-        return this.cptDepl;
+        return this.cptDepl*4;
+    }
+
+
+    public void afficheTable() {
+        for (Entree e: this.table.keySet()){
+            System.out.println(e.getNom());
+        }
+        for (Symbole s: this.table.values()){
+            System.out.println(s.getDeplacement());
+        }
     }
 }

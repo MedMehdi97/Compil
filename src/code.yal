@@ -1,5 +1,7 @@
 programme test debut
-ecrire 10;
-ecrire 11;
-ecrire 4;
+entier a;
+entier b;
+entier c;
+ecrire 2;
+entier d;
 fin

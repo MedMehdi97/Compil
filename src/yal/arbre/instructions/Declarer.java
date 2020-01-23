@@ -2,19 +2,25 @@ package yal.arbre.instructions;
 
 import yal.arbre.expressions.Expression;
 import yal.arbre.expressions.Idf;
+import yal.tds.Tds;
+import yal.tds.entree.EntreeVariable;
+import yal.tds.symbole.Symbole;
 
-public class Declaration extends Instruction {
+public class Declarer extends Instruction {
     private String nom;
+    private EntreeVariable e;
     private int deplacement;
 
-    protected Declaration(int n, String nom, int deplacement) {
+    public Declarer(int n, String nom, EntreeVariable e) {
         super(n);
         this.nom = nom;
-        this.deplacement=deplacement;
+        this.e=e;
     }
 
     @Override
     public void verifier(){
+        Symbole s= Tds.getInstance().identifier(this.e);
+        this.deplacement=s.getDeplacement();
     }
 
     @Override

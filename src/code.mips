@@ -14,12 +14,12 @@ addi $sp, $sp, -4
 li $v0, 5
 syscall
 #Empiler la variable
-sw $v0, -4($s7)
+sw $v0, 0($s7)
 #Instruction Lecture
 li $v0, 5
 syscall
 #Empiler la variable
-sw $v0, 0($s7)
+sw $v0, -4($s7)
 
 end :
 

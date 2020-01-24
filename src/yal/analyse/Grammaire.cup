@@ -91,8 +91,9 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
                 DECLARATION:d POINTVIRGULE
                 {: RESULT = d; :}
          |
-                LIRE EXP:e POINTVIRGULE
-                {: RESULT = new Lire(eleft + 1, e) ; :}
+                LIRE IDF:i POINTVIRGULE
+                {:  Idf id=new Idf(ileft +1, i) ;
+                    RESULT = new Lire(ileft + 1, id) ; :}
                 ;
 
 

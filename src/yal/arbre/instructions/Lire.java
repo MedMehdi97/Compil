@@ -20,7 +20,7 @@ public class Lire extends Instruction{
         code.append("li $v0, 5\n");   // Code du read pour un entier
         code.append("syscall\n");     // recupération du résultat dans $v0
         code.append("#Empiler la variable\n");
-        code.append("sw $v0, "+exp.toMIPS()+"($s7)\n");
+        code.append("sw $v0, "+exp.toMIPS()+"\n");
         return code.toString();
     }
 }

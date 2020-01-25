@@ -22,7 +22,7 @@ public class Idf extends Expression {
     @Override
     public String toMIPS() {
         StringBuilder code=new StringBuilder("");
-        code.append(this.deplacement); //recupération du déplacement dans la pile
+        code.append(this.deplacement+"($s7)"); //recupération du déplacement dans la pile
         return code.toString();
     }
 }

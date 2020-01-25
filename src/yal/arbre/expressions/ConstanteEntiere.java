@@ -9,7 +9,9 @@ public class ConstanteEntiere extends Constante {
     @Override
     public String toMIPS() {
         StringBuilder code= new StringBuilder();
-        code.append(this.cste);
+        code.append("li $v0, "+ this.cste +"\n"); //chargement de la valeur dans $v0
+        code.append("sw $v0, 0($sp)\n");    //ranger $v0 dans la pile
+        code.append("addi $sp, $sp, -4\n");
         return code.toString();
     }
 

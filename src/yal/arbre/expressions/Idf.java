@@ -22,7 +22,13 @@ public class Idf extends Expression {
     @Override
     public String toMIPS() {
         StringBuilder code=new StringBuilder("");
-        code.append(this.deplacement+"($s7)"); //recupération du déplacement dans la pile
+        code.append("lw $v0, " + this.deplacement+"($s7)\n"); //chargement de la valeur dans $v0
+        code.append("sw $v0, 0($sp)\n");  //stockage de la valeur dans la pile
+        code.append("addi $sp, $sp, -4\n");
         return code.toString();
+    }
+
+    public int getDeplacement() {
+        return deplacement;
     }
 }

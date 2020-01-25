@@ -20,12 +20,9 @@ public class Ecrire extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder code=new StringBuilder("#Instruction Ecrire \n");
-        if (this.exp instanceof Idf){
-            code.append("lw $v0, "+ this.exp.toMIPS()+"\n");
-        }
-        else {
-            code.append("li $v0, "+ this.exp.toMIPS()+"\n");
-        }
+        code.append(this.exp.toMIPS());
+        code.append("addi $sp, $sp, 4\n");
+        code.append("lw $v0, 0($sp)\n");   //recupération de la valeur à afficher de la pile
         code.append("move $a0, $v0\n"); // $a0 <- $v0
         code.append("li $v0, 1\n"); //code du print
         code.append("syscall\n");

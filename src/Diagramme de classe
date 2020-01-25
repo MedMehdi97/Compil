@@ -48,14 +48,29 @@ class Declarer {
 Declarer  -up-|> Instruction
 
 class Ecrire {
-   Ecrire(int n)
+   Ecrire(Expression e, int n)
    void verifier()
    String toMIPS()
 }
 
 Ecrire  -up-|> Instruction
+class Lire {
+   Lire(int n, Idf idf)
+   void verifier()
+   String toMIPS()
+}
 
+Lire  -up-|> Instruction
+Lire - "1" Idf
+class Affectation {
+   Lire(int n, Idf idf, Expression e)
+   void verifier()
+   String toMIPS()
+}
 
+Affectation  -up-|> Instruction
+Affectation - "1" Idf
+Affectation - "1" Expression
 
 abstract class Expression {
    protected Expression(int n)
@@ -83,6 +98,7 @@ class Idf {
    Idf(int n, String nom)
    void verifier()
    String toMIPS()
+   int getDeplacement()
 }
 
 abstract class Entree {

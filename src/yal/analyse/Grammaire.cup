@@ -58,7 +58,7 @@ parser code {:
 
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER, LIRE ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER, LIRE, EGALE ;
 terminal String    IDF, CSTENTIERE ;
 
 /* Non terminals used in the grammar section.  */
@@ -113,6 +113,9 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
                 LIRE IDF:i POINTVIRGULE
                 {:  Idf id=new Idf(ileft +1, i) ;
                     RESULT = new Lire(ileft + 1, id) ; :}
+         |      IDF:i EGALE EXP:e POINTVIRGULE
+                {:  Idf id=new Idf(ileft +1, i);
+                    RESULT =new Affectation(ileft +1, id, e);:}
                 ;
 
 

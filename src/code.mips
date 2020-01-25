@@ -6,34 +6,46 @@ main :
 
 move $s7,$sp
 
- # reservation de l'espace pour une variable
+#reservation de l'espace pour une variable
 addi $sp, $sp, -4
- # reservation de l'espace pour une variable
+#reservation de l'espace pour une variable
 addi $sp, $sp, -4
- # reservation de l'espace pour une variable
-addi $sp, $sp, -4
-#Instruction Ecrire 
+#Affectation
 li $v0, 2
-move $a0, $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -4($s7)
+#Affectation
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, 0($s7)
+#Affectation
 li $v0, 1
-syscall
-#Instruction Ecrire 
-li $v0, 5
-move $a0, $v0
-li $v0, 1
-syscall
-#Instruction Lecture
-li $v0, 5
-syscall
-#Empiler la variable
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
 sw $v0, -4($s7)
 #Instruction Ecrire 
-lw $v0, -4($s7)
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
 move $a0, $v0
 li $v0, 1
 syscall
 #Instruction Ecrire 
-li $v0, 10
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
 move $a0, $v0
 li $v0, 1
 syscall

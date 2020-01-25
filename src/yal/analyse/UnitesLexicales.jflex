@@ -49,6 +49,7 @@ espace = {finDeLigne}  | [ \t\f]
 "lire"               { return symbol(CodesLexicaux.LIRE); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
+"="                    { return symbol(CodesLexicaux.EGALE); }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 

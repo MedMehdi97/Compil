@@ -1,8 +1,11 @@
-programme test debut
+programme idf
+debut
 entier a;
+//Declaration de b
 entier b;
-entier a;
-c=2;
-ecrire c;
-lire d;
+//ecrire 2
+ecrire 2;
+//ecrire a
+ecrire a;
+ecrire 1;
 fin

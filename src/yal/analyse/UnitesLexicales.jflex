@@ -37,6 +37,7 @@ csteE = [0-9]+
 
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
+commentaire = \/\/.*\n?
 
 %%
 
@@ -56,6 +57,7 @@ espace = {finDeLigne}  | [ \t\f]
 {idf}      	           { return symbol(CodesLexicaux.IDF, yytext()); }
 
 {espace}               { }
+{commentaire}      { }
 
 .                      { throw new AnalyseLexicaleException(yyline, yycolumn, yytext()) ; }
 

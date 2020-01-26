@@ -90,12 +90,5 @@ public class Tds {
             System.exit(0);
         }
     }
-    public void afficheTable() {
-        for (Entree e: this.table.keySet()){
-            System.out.println(e.getNom());
-        }
-        for (Symbole s: this.table.values()){
-            System.out.println(s.getDeplacement());
-        }
-    }
+
 }

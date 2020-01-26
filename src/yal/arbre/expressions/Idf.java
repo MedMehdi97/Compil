@@ -15,8 +15,12 @@ public class Idf extends Expression {
 
     @Override
     public void verifier() {
+        try {
         Symbole s = Tds.getInstance().identifier(new EntreeVariable(this.nom, this.getNoLigne()));
-        this.deplacement = s.getDeplacement();
+            this.deplacement = s.getDeplacement();
+        }catch (java.lang.NullPointerException e){
+            this.deplacement=-1;
+        }
     }
 
     @Override

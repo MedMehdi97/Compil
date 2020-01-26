@@ -6,12 +6,14 @@ import yal.exceptions.VariableNonDeclareeException;
 import yal.tds.entree.Entree;
 import yal.tds.symbole.Symbole;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Tds {
     private  int cptDepl = 0;
     private static Tds instance = new Tds();
     private HashMap<Entree, Symbole> table = new HashMap<Entree, Symbole>();
+    private ArrayList<AnalyseSemantiqueException> listeException=new ArrayList<>();
 
     /**
      * Constructeur vide
@@ -48,10 +50,10 @@ public class Tds {
      * @param e
      * @param s
      */
-    public void ajouter(Entree e, Symbole s)throws DoubleDeclarationException {
+    public void ajouter(Entree e, Symbole s) {
         for (Entree e1: this.table.keySet()){
             if (e.getNom().equals(e1.getNom())){
-                throw new DoubleDeclarationException(e.getLigne(),"Variable déja déclaré");
+                 listeException.add(new DoubleDeclarationException(e.getLigne(),"Variable doublement déclaré"));
             }
         }
         this.table.put(e,s);
@@ -69,7 +71,8 @@ public class Tds {
                 return table.get(en);
             }
         }
-        throw new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée");
+        listeException.add(new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée"));
+        return null;
     }
 
     /**
@@ -79,7 +82,14 @@ public class Tds {
         return this.cptDepl*(-4);
     }
 
-
+    public void declencherException(){
+        if (listeException.size()!=0) {
+            for (AnalyseSemantiqueException e : listeException) {
+                System.out.println(e.getMessage());
+            }
+            System.exit(0);
+        }
+    }
     public void afficheTable() {
         for (Entree e: this.table.keySet()){
             System.out.println(e.getNom());

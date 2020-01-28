@@ -5,6 +5,7 @@ import yal.exceptions.DoubleDeclarationException;
 import yal.exceptions.VariableNonDeclareeException;
 import yal.tds.entree.Entree;
 import yal.tds.symbole.Symbole;
+import yal.tds.symbole.SymboleVariable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,7 +73,7 @@ public class Tds {
             }
         }
         listeException.add(new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée"));
-        return null;
+        return new SymboleVariable(-1);
     }
 
     /**
@@ -82,6 +83,9 @@ public class Tds {
         return this.cptDepl*(-4);
     }
 
+    /**
+     * Fonction qui déclenche les exceptions sémantiques sans l'arrêt de l'éxecution du programme
+     */
     public void declencherException(){
         if (listeException.size()!=0) {
             for (AnalyseSemantiqueException e : listeException) {

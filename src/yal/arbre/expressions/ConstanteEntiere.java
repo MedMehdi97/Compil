@@ -1,7 +1,11 @@
 package yal.arbre.expressions;
 
 public class ConstanteEntiere extends Constante {
-    
+    /**
+     * Constructeur de la classe ConstanteEntiere
+     * @param texte
+     * @param n
+     */
     public ConstanteEntiere(String texte, int n) {
         super(texte, n) ;
     }

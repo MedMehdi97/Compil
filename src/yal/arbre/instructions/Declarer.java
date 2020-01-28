@@ -11,6 +11,12 @@ public class Declarer extends Instruction {
     private EntreeVariable e;
     private int deplacement;
 
+    /**
+     * Constructeur de la classe Declarer
+     * @param n  Numéro de ligne
+     * @param nom Nom de la variable à lire
+     * @param e   Entree de la variable à lire
+     */
     public Declarer(int n, String nom, EntreeVariable e) {
         super(n);
         this.nom = nom;
@@ -19,10 +25,13 @@ public class Declarer extends Instruction {
 
     @Override
     public void verifier(){
-        Symbole s= Tds.getInstance().identifier(this.e);
-        this.deplacement=s.getDeplacement();
+
     }
 
+    /**
+     * Fonction qui génere le code d'une déclaration de variable
+     * @return
+     */
     @Override
     public String toMIPS() {
         StringBuilder code=new StringBuilder("#reservation de l'espace pour une variable\n");

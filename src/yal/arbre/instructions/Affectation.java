@@ -6,18 +6,32 @@ import yal.arbre.expressions.Idf;
 public class Affectation extends Instruction {
     private Idf idf;
     private Expression exp;
+
+    /**
+     * Constructeur de la classe Affectation
+     * @param n Numéro de la ligne
+     * @param idf  Idf partie gauche de l'affectation
+     * @param exp  Exp partie droite de l'affectation
+     */
     public Affectation(int n, Idf idf, Expression exp) {
         super(n);
         this.idf=idf;
         this.exp=exp;
     }
 
+    /**
+     * Fonction vérifier qui appelle les fonctions verifier des deux parties de l'affectation
+     */
     @Override
     public void verifier() {
         this.idf.verifier();
         this.exp.verifier();
     }
 
+    /**
+     * Fonction qui génere le code d'une affectation
+     * @return
+     */
     @Override
     public String toMIPS() {
         StringBuilder code = new StringBuilder("#Affectation\n");

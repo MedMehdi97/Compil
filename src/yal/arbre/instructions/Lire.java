@@ -5,16 +5,29 @@ import yal.arbre.expressions.Idf;
 
 public class Lire extends Instruction{
     protected Idf idf ;
+
+    /**
+     * Constructeur de la classe Lire
+     * @param n   Numéro de la ligne
+     * @param idf  Idf à lire
+     */
     public Lire(int n, Idf idf) {
         super(n);
         this.idf=idf;
     }
 
+    /**
+     * fonction vérifier afin de controler si la variable est déclaré
+     */
     @Override
     public void verifier() {
          this.idf.verifier();
     }
 
+    /**
+     * Géneration du code pout la Lecture d'une variable
+     * @return
+     */
     @Override
     public String toMIPS() {
         StringBuilder code = new StringBuilder("#Instruction Lecture\n");

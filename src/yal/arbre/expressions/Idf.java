@@ -7,22 +7,31 @@ import yal.tds.symbole.Symbole;
 public class Idf extends Expression {
     private String nom;
     private int deplacement;
+
+    /**
+     * Constructeur de la classe Idf
+     * @param n Numéro de ligne
+     * @param nom Nom
+     */
     public Idf(int n, String nom) {
         super(n);
         this.nom=nom;
     }
 
-
+    /**
+     * fonction verifier controle si l'élement existe dans la tabl des symboles et initialise son deplacement
+     */
     @Override
     public void verifier() {
-        try {
-        Symbole s = Tds.getInstance().identifier(new EntreeVariable(this.nom, this.getNoLigne()));
+
+            Symbole s = Tds.getInstance().identifier(new EntreeVariable(this.nom, this.getNoLigne()));
             this.deplacement = s.getDeplacement();
-        }catch (java.lang.NullPointerException e){
-            this.deplacement=-1;
-        }
     }
 
+    /**
+     * fonction qui gènere le code toMIPS afin d'utiliser Idf dans des instructions
+     * @return
+     */
     @Override
     public String toMIPS() {
         StringBuilder code=new StringBuilder("");
@@ -32,6 +41,10 @@ public class Idf extends Expression {
         return code.toString();
     }
 
+    /**
+     * fonction getDeplacement
+     * @return
+     */
     public int getDeplacement() {
         return deplacement;
     }

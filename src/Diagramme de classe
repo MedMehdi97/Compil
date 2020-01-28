@@ -18,6 +18,9 @@ AnalyseException -up-|> RuntimeException
 
 AnalyseLexicaleException -up-|> AnalyseException
 AnalyseSyntaxiqueException -up-|> AnalyseException
+AnalyseSemantiqueException -up-|> AnalyseException
+DoubleDeclarationException -up-|> AnalyseSemantiqueException
+VariableNonDeclareeException -up-|> AnalyseSemantiqueException
 
 abstract class ArbreAbstrait {
    int noLigne

@@ -7,16 +7,28 @@ public class Ecrire extends Instruction {
 
     protected Expression exp ;
 
+    /**
+     * Constructeur de la classe Ecrire
+     * @param e   l'expression à afficher
+     * @param n   Numéro de la ligne
+     */
     public Ecrire (Expression e, int n) {
         super(n) ;
         exp = e ;
     }
 
+    /**
+     * Fonction verifier qui appelle la fonction verifier de l'expression à afficher
+     */
     @Override
     public void verifier() {
         this.exp.verifier();
     }
 
+    /**
+     * Géneration du code de l'instruction écrire
+     * @return
+     */
     @Override
     public String toMIPS() {
         StringBuilder code=new StringBuilder("#Instruction Ecrire \n");

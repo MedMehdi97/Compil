@@ -76,7 +76,11 @@ Affectation - "1" Idf
 Affectation - "1" Expression
 
 abstract class Expression {
+   protected Expression expG
+   protected Expression expD
+   protected String oper
    protected Expression(int n)
+   public Expression(int n, Expression expG, Expression expD, String oper)
 }
 
 Expression  -up-|> ArbreAbstrait

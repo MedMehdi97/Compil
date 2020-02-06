@@ -15,6 +15,9 @@ public class Tds {
     private static Tds instance = new Tds();
     private HashMap<Entree, Symbole> table = new HashMap<Entree, Symbole>();
     private ArrayList<AnalyseSemantiqueException> listeException=new ArrayList<>();
+    private int cptBranchement=1;
+
+
 
     /**
      * Constructeur vide
@@ -95,4 +98,18 @@ public class Tds {
         }
     }
 
+    /**
+     * Getteur de cptBranchement
+     * @return
+     */
+    public int getCptBranchement() {
+        return cptBranchement;
+    }
+
+    /**
+     *  Fonction qui incrémete le cptBranchement
+     */
+    public void addCptBranchement(){
+        this.cptBranchement+=1;
+    }
 }

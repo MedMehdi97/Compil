@@ -38,7 +38,6 @@ csteE = [0-9]+
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
 commentaire = \/\/.*\n?
-operateurA = [\+\-]
 operateurB = [\*\/]
 operateurCompA = (<|>)
 operateurCompB = [\=\=|\!\=]
@@ -64,6 +63,8 @@ operateurCompB = [\=\=|\!\=]
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 "="                    { return symbol(CodesLexicaux.EGALE); }
+"+"                    { return symbol(CodesLexicaux.PLUS); }
+"-"                    { return symbol(CodesLexicaux.MOINS); }
 
 "et"                   { return symbol(CodesLexicaux.OPERET, yytext()); }
 "ou"                   { return symbol(CodesLexicaux.OPEROU, yytext()); }
@@ -78,7 +79,7 @@ operateurCompB = [\=\=|\!\=]
 {operateurCompA}        { return symbol(CodesLexicaux.OPERLOGIQUEA, yytext()); }
 {operateurCompB}        { return symbol(CodesLexicaux.OPERLOGIQUEB, yytext()); }
 
-{operateurA}            { return symbol(CodesLexicaux.OPERA, yytext()); }
+
 {operateurB}           { return symbol(CodesLexicaux.OPERB, yytext()); }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }

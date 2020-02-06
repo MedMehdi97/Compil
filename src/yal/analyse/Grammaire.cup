@@ -59,12 +59,12 @@ parser code {:
 /* Terminals (tokens returned by the scanner).  */
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER, LIRE, EGALE, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, NON, PAROUVRANTE, PARFERMANTE ;
-terminal String    IDF, CSTENTIERE, OPERA, OPERB, OPERLOGIQUEA, OPERLOGIQUEB, OPERET, OPEROU, INF, SUP ;
+terminal String    IDF, CSTENTIERE, OPERA, OPERB, OPERLOGIQUEA, OPERLOGIQUEB, OPERET, OPEROU, INF, SUP, PLUS, MOINS ;
 
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, LINST, LDEC, CPRG;
-non terminal Expression EXP, EXP1, EXP2 ;
+non terminal Expression EXP, EXP1, EXP2;
 non terminal Instruction DECL_VAR, DECLARATION, INST, DEC;
 
 /* ----------------------------Grammar Section-------------------- */
@@ -118,8 +118,10 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
                     RESULT =new Affectation(ileft +1, id, e);:}
                 ;
 
-EXP    ::= EXP:g OPERA:o EXP1:d
-               {: RESULT = new ExpressionArithmetique(gleft + 1, g, d, o); :}
+EXP    ::= EXP:g PLUS EXP1:d
+               {: RESULT = new ExpressionArithmetique(gleft + 1, g, d, "+"); :}
+         | EXP:g MOINS EXP1:d
+                          {: RESULT = new ExpressionArithmetique(gleft + 1, g, d, "-"); :}
          | EXP1:e
                {: RESULT = e; :}
                ;
@@ -130,6 +132,8 @@ EXP1   ::= EXP1:g OPERB:o EXP2:d
                ;
 EXP2   ::= PAROUVRANTE EXP:e PARFERMANTE
                {: RESULT =e; :}
+         | MOINS EXP2:e
+               {: RESULT = new ExpressionArithmetiqueNegative(eleft+1, e); :}
          | CSTENTIERE:c
                {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}
          | IDF:i

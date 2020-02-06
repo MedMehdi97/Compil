@@ -35,7 +35,7 @@ public class Declarer extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder code=new StringBuilder("#reservation de l'espace pour une variable\n");
-        code.append("addi $sp, $sp, -4\n"); //Plus tars il faudra calculer le deplacement
+        code.append("addi $sp, $sp, -4\n");
         return code.toString();
     }
 }

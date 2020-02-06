@@ -18,30 +18,7 @@ addi $sp, $sp, 4
 lw $v0, 0($sp)
 sw $v0, -4($s7)
 #Affectation
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 6
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-sub $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 3
+li $v0, 4
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 li $v0, 2
@@ -51,25 +28,17 @@ addi $sp, $sp, 4
 lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-mult $v0, $t8
+div $v0, $t8
 mflo $v0
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
+li $t8, 2
+mult $v0, $t8
+mflo $t8
 lw $v0, 0($sp)
-add $v0, $v0, $t8
+sub $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4

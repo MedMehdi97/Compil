@@ -26,7 +26,7 @@ addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
 sw $v0, 0($s7)
-#Instruction Ecrire 
+#Condition
 li $v0, 1
 sw $v0, 0($sp)
 addi $sp, $sp, -4
@@ -37,7 +37,7 @@ addi $sp, $sp, 4
 lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-ble $v0, $t8, condf1
+bge $v0, $t8, condf1
 li $v0, 1
 b fincond1
 condf1: 
@@ -45,43 +45,72 @@ li $v0, 0
 fincond1: 
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-lw $v0, -4($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-lw $v0, 0($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-ble $v0, $t8, condf2
+beqz $v0, sinon1
+#Instruction Ecrire 
 li $v0, 1
-b fincond2
-condf2: 
-li $v0, 0
-fincond2: 
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-or $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-move $t8, $v0
-li $v0, 4
-beqz $t8, ecrire1
-la $a0, vrai
-b finecrire1
-ecrire1: 
-la $a0, faux
-finecrire1:
+move $a0, $v0
+li $v0, 1
 syscall
 
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Instruction Ecrire 
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Instruction Ecrire 
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+b finCond1
+sinon1: 
+#Instruction Ecrire 
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+finCond1:
 end :
 
 li $v0, 10

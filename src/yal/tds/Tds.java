@@ -17,7 +17,7 @@ public class Tds {
     private ArrayList<AnalyseSemantiqueException> listeException=new ArrayList<>();
     private int cptBranchement=1;
     private int cptEcrire=1;
-
+    private int cptCodition=1;
 
     /**
      * Constructeur vide
@@ -126,5 +126,17 @@ public class Tds {
      */
     public void addCptEcrire(){
         this.cptEcrire+=1;
+    }
+
+    /**
+     * Cpt getCptCondition
+     * @return
+     */
+    public int getCptCodition() {
+        return cptCodition;
+    }
+
+    public void addCptCondition() {
+        this.cptCodition+=1;
     }
 }

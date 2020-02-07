@@ -65,6 +65,11 @@ public class Ecrire extends Instruction {
             Tds.getInstance().addCptEcrire();
         }
         code.append("syscall\n");
+        //Génération du saut de ligne dans le MIPS
+        code.append("\n#Saut de ligne\n");
+        code.append("li $v0, 4\n"); // Code du print pour le retour à la ligne
+        code.append("la $a0, ln\n");  // Saut à la ligne
+        code.append("syscall\n\n");   // Appel du saut de ligne
         return code.toString();
     }
 

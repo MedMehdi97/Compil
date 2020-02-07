@@ -64,7 +64,8 @@ terminal String    IDF, CSTENTIERE, OPERA, OPERB, OPERLOGIQUEA, OPERET, OPEROU, 
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, LINST, LDEC, CPRG;
-non terminal Expression EXP, EXP1, EXP2, EXPLOG, EXPLOG1, EXPLOG2;
+non terminal Expression EXP, EXP1, EXP2;
+non terminal ExpressionLogique EXPLOG, EXPLOG1, EXPLOG2;
 non terminal Instruction DECL_VAR, DECLARATION, INST, DEC;
 
 
@@ -119,6 +120,10 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
          |      IDF:i EGALE EXP:e POINTVIRGULE
                 {:  Idf id=new Idf(ileft +1, i);
                     RESULT =new Affectation(ileft +1, id, e);:}
+         |      SI EXPLOG:e ALORS LINST:li FINSI
+                {: RESULT =new Condition(eleft+1, e, li); :}
+         |      SI EXPLOG:e ALORS LINST:li SINON LINST:lis FINSI
+                {: RESULT =new Condition(eleft+1, e, li, lis); :}
                 ;
 
 EXP    ::= EXP:g PLUS EXP1:d

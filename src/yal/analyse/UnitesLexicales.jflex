@@ -40,7 +40,6 @@ espace = {finDeLigne}  | [ \t\f]
 commentaire = \/\/.*\n?
 operateurB = [\*\/]
 operateurCompA = (<|>)
-operateurCompB = [\=\=|\!\=]
 
 
 %%
@@ -69,15 +68,15 @@ operateurCompB = [\=\=|\!\=]
 "et"                   { return symbol(CodesLexicaux.OPERET, yytext()); }
 "ou"                   { return symbol(CodesLexicaux.OPEROU, yytext()); }
 "="                    { return symbol(CodesLexicaux.EGALE); }
-"<"                    { return symbol(CodesLexicaux.INF); }
-">"                    { return symbol(CodesLexicaux.SUP); }
+"=="                   { return symbol(CodesLexicaux.OPEREGALE); }
+"!="                   { return symbol(CodesLexicaux.OPERNEGALE); }
 
 "("                    { return symbol(CodesLexicaux.PAROUVRANTE); }
 ")"                    { return symbol(CodesLexicaux.PARFERMANTE); }
 
 
 {operateurCompA}        { return symbol(CodesLexicaux.OPERLOGIQUEA, yytext()); }
-{operateurCompB}        { return symbol(CodesLexicaux.OPERLOGIQUEB, yytext()); }
+
 
 
 {operateurB}           { return symbol(CodesLexicaux.OPERB, yytext()); }

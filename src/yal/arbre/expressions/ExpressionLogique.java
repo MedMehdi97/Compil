@@ -70,6 +70,7 @@ public class ExpressionLogique extends Expression {
             //cas de condition fausse
             string.append("li $v0, 0\n");
             string.append("fincond"+Tds.getInstance().getCptBranchement()+": \n");
+            Tds.getInstance().addCptBranchement();
 
         }
         string.append("sw $v0, 0($sp)\n");

@@ -59,13 +59,14 @@ parser code {:
 /* Terminals (tokens returned by the scanner).  */
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER, LIRE, EGALE, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, NON, PAROUVRANTE, PARFERMANTE ;
-terminal String    IDF, CSTENTIERE, OPERA, OPERB, OPERLOGIQUEA, OPERLOGIQUEB, OPERET, OPEROU, INF, SUP, PLUS, MOINS ;
+terminal String    IDF, CSTENTIERE, OPERA, OPERB, OPERLOGIQUEA, OPERET, OPEROU, PLUS, MOINS, OPEREGALE, OPERNEGALE ;
 
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, LINST, LDEC, CPRG;
-non terminal Expression EXP, EXP1, EXP2;
+non terminal Expression EXP, EXP1, EXP2, EXPLOG, EXPLOG1, EXPLOG2;
 non terminal Instruction DECL_VAR, DECLARATION, INST, DEC;
+
 
 /* ----------------------------Grammar Section-------------------- */
 
@@ -108,7 +109,9 @@ LINST   ::=     LINST:li  INST:i
                 ;
 
 INST    ::=     ECRIRE EXP:e POINTVIRGULE
-                {: RESULT = new Ecrire(e, eleft + 1) ; :}
+                {: RESULT = new Ecrire(e, eleft + 1, 1) ; :}
+         |     ECRIRE EXPLOG:e POINTVIRGULE
+               {: RESULT = new Ecrire(e, eleft + 1, 2) ; :}
          |
                 LIRE IDF:i POINTVIRGULE
                 {:  Idf id=new Idf(ileft +1, i) ;
@@ -140,6 +143,27 @@ EXP2   ::= PAROUVRANTE EXP:e PARFERMANTE
                {: RESULT = new Idf(ileft + 1, i) ; :}
                ;
 
+EXPLOG ::= EXPLOG:g OPERET:o EXPLOG1:d
+               {: RESULT = new ExpressionLogique(gleft+1, g, d, o); :}
+         |  EXPLOG:g OPEROU:o EXPLOG1:d
+               {: RESULT = new ExpressionLogique(gleft+1, g, d, o); :}
+         |  EXPLOG1:e
+            {: RESULT = e; :}
+            ;
+EXPLOG1 ::= PAROUVRANTE EXPLOG:e PARFERMANTE
+                {: RESULT = e; :}
+          | EXPLOG2:e
+                {: RESULT=e; :}
+                ;
+EXPLOG2 ::= EXP:g OPERLOGIQUEA:o EXP:d
+            {: RESULT = new ExpressionLogique(gleft+1, g, d, o); :}
+          |
+            EXP:g OPEREGALE:o EXP:d
+            {: RESULT = new ExpressionLogique(gleft+1, g, d, "=="); :}
+          |
+             EXP:g OPERNEGALE:o EXP:d
+             {: RESULT = new ExpressionLogique(gleft+1, g, d, "!="); :}
+            ;
 
 DECL_VAR ::=    ENTIER IDF:i
                 {: EntreeVariable e = new EntreeVariable(i, ileft + 1);

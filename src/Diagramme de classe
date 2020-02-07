@@ -84,8 +84,22 @@ abstract class Expression {
 }
 
 Expression  -up-|> ArbreAbstrait
+class ExpressionArithmetique {
+   protected Expression(int n)
+   public Expression(int n, Expression expG, Expression expD, String oper)
+   void verfier()
+   String toMIPS()
+}
+ExpressionArithmetique  -up-|> Expression
 Ecrire - "1" Expression
 
+class ExpressionArithmetiqueNegative {
+   protected Expression(int n, Expression e)
+   void verfier()
+   String toMIPS()
+}
+ExpressionArithmetiqueNegative  -up-|> Expression
+ExpressionArithmetiqueNegative - "1" Expression
 abstract class Constante {
    String cste
    protected Constante(String texte, int n)

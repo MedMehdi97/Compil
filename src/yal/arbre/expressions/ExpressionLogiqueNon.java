@@ -9,7 +9,7 @@ public class ExpressionLogiqueNon extends Expression {
 
     @Override
     public void verifier() {
-
+     this.exp.verifier();
     }
 
     @Override

@@ -16,7 +16,7 @@ public class Tds {
     private HashMap<Entree, Symbole> table = new HashMap<Entree, Symbole>();
     private ArrayList<AnalyseSemantiqueException> listeException=new ArrayList<>();
     private int cptBranchement=1;
-
+    private int cptEcrire=1;
 
 
     /**
@@ -111,5 +111,20 @@ public class Tds {
      */
     public void addCptBranchement(){
         this.cptBranchement+=1;
+    }
+
+    /**
+     * Getteur de cptEcrire
+     * @return
+     */
+    public int getCptEcrie() {
+        return cptEcrire;
+    }
+
+    /**
+     *  Fonction qui incrémete le cptEcrire
+     */
+    public void addCptEcrire(){
+        this.cptEcrire+=1;
     }
 }

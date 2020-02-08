@@ -19,6 +19,7 @@ public class Tds {
     private int cptEcrire=1;
     private int cptCodition=1;
     private int cptNonLog=1;
+    private int cptBoucle=1;
 
     /**
      * Constructeur vide
@@ -149,6 +150,19 @@ public class Tds {
 
     public void addCptNonlog(){
         this.cptNonLog+=1;
+    }
+
+    /**
+     * getteur de cptBoucle
+     * @return
+     */
+    public int getCptBoucle(){ return cptNonLog;}
+
+    /**
+     * incrémente la variable cptBoucle
+     */
+    public void addCptBoucle(){
+        this.cptBoucle+=1;
     }
 
 }

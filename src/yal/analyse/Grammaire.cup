@@ -59,14 +59,14 @@ parser code {:
 /* Terminals (tokens returned by the scanner).  */
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER, LIRE, EGALE, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE ;
-terminal String    IDF, CSTENTIERE, OPERA, OPERB, OPERLOGIQUEA, OPERET, OPEROU, PLUS, MOINS, OPEREGALE, OPERNEGALE, NON ;
+terminal String    IDF, CSTENTIERE, OPERB, OPERLOGIQUEA, OPERET, OPEROU, PLUS, MOINS, OPEREGALE, OPERNEGALE, NON ;
 
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, LINST, LDEC, CPRG;
 non terminal ExpressionArithmetique EXP, EXP1, EXP2;
 non terminal ExpressionLogique EXPLOG, EXPLOG1, EXPLOG2;
-non terminal Instruction DECL_VAR, DECLARATION, INST, DEC;
+non terminal Instruction DECL_VAR, INST, DEC;
 
 
 /* ----------------------------Grammar Section-------------------- */
@@ -124,6 +124,8 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
                 {: RESULT =new Condition(eleft+1, e, li); :}
          |      SI EXPLOG:e ALORS LINST:li SINON LINST:lis FINSI
                 {: RESULT =new Condition(eleft+1, e, li, lis); :}
+         |     TANTQUE EXPLOG:e REPETER LINST:li FINTANTQUE
+               {: RESULT= new Boucle(eleft+1, e, li); :}
                 ;
 
 EXP    ::= EXP:g PLUS EXP1:d

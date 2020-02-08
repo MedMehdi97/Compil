@@ -1,10 +1,8 @@
 programme idf debut
 entier a;
-entier b;
-entier c;
-a=3;
-b=1;
-c=1;
-ecrire non(a>b*2) ou c==1;
-ecrire non(non(a>b*2) ou c==1);
+a=1;
+tantque a<5 repeter
+  ecrire a;
+  a=a+1;
+fintantque
 fin

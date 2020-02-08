@@ -18,6 +18,7 @@ public class Tds {
     private int cptBranchement=1;
     private int cptEcrire=1;
     private int cptCodition=1;
+    private int cptNonLog=1;
 
     /**
      * Constructeur vide
@@ -117,7 +118,7 @@ public class Tds {
      * Getteur de cptEcrire
      * @return
      */
-    public int getCptEcrie() {
+    public int getCptEcrire() {
         return cptEcrire;
     }
 
@@ -129,7 +130,7 @@ public class Tds {
     }
 
     /**
-     * Cpt getCptCondition
+     *  getteur getCptCondition
      * @return
      */
     public int getCptCodition() {
@@ -139,4 +140,15 @@ public class Tds {
     public void addCptCondition() {
         this.cptCodition+=1;
     }
+
+    /**
+     * getteur de cptNonLog
+     * @return
+     */
+    public int getCptNonLog(){ return cptNonLog;}
+
+    public void addCptNonlog(){
+        this.cptNonLog+=1;
+    }
+
 }

@@ -1,6 +1,6 @@
 package yal.arbre.expressions;
 
-public abstract class Constante extends Expression {
+public abstract class Constante extends ExpressionArithmetique {
 
     protected String cste ;
     
@@ -11,6 +11,7 @@ public abstract class Constante extends Expression {
     
     @Override
     public void verifier() {
+
     }
 
     @Override

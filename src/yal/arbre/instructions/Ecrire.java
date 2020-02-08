@@ -1,26 +1,34 @@
 package yal.arbre.instructions;
-
-import yal.arbre.expressions.Expression;
+import yal.arbre.expressions.ExpressionArithmetique;
 import yal.arbre.expressions.ExpressionLogique;
-import yal.arbre.expressions.Idf;
 import yal.tds.Tds;
 
 public class Ecrire extends Instruction {
 
-    protected Expression exp ;
-    protected int c;
+    protected ExpressionArithmetique exp ;
+    protected ExpressionLogique expL;
 
     /**
-     * Constructeur de la classe Ecrire
-     * @param e   l'expression à afficher
+     * Constructeur de la classe Ecrire pour une expression arithmétique
+     * @param e   l'expression arithmétique à afficher
      * @param n   Numéro de la ligne
      */
-    public Ecrire (Expression e, int n, int c) {
+    public Ecrire (ExpressionArithmetique e, int n) {
         super(n) ;
-        this.c=c;
         exp = e ;
+        expL =null;
     }
 
+    /**
+     * Constructeur de la classe Ecrire pour une expression logique
+     * @param e   l'expression arithmétique à afficher
+     * @param n   Numéro de la ligne
+     */
+    public Ecrire (ExpressionLogique e, int n){
+        super(n);
+        expL=e;
+        exp=null;
+    }
 
 
     /**
@@ -28,7 +36,7 @@ public class Ecrire extends Instruction {
      */
     @Override
     public void verifier() {
-        this.exp.verifier();
+        if (exp!=null) this.exp.verifier(); else this.expL.verifier();
     }
 
     /**
@@ -37,8 +45,8 @@ public class Ecrire extends Instruction {
      */
     @Override
     public String toMIPS() {
-        StringBuilder code=new StringBuilder("#Instruction Ecrire \n");
-        if (c==1) {
+        StringBuilder code=new StringBuilder("\n#Instruction Ecrire \n");
+        if (exp!=null) {
             //cas d'expression arithmétique
             code.append(this.exp.toMIPS());
             code.append("addi $sp, $sp, 4\n");
@@ -47,21 +55,20 @@ public class Ecrire extends Instruction {
             code.append("li $v0, 1\n"); //code du print d'un entier
         }else {
             //cas d'expression logique
-            code.append(this.exp.toMIPS());
+            code.append(this.expL.toMIPS());
             code.append("addi $sp, $sp, 4\n");
             code.append("lw $v0, 0($sp)\n");
             code.append("move $t8, $v0\n");   // $v0 <- $t8
-
             code.append("li $v0, 4\n");       // code du print d'une chaine de caractères
             // test si le resultat de l'expression logique est vraie ou faux
-            code.append("beqz $t8, ecrire"+ Tds.getInstance().getCptEcrie() + "\n");
+            code.append("beqz $t8, ecrire"+ Tds.getInstance().getCptEcrire() + "\n");
             // cas de l'expression est vraie
             code.append("la $a0, vrai\n");
-            code.append("b finecrire"+Tds.getInstance().getCptEcrie()+"\n");
+            code.append("b finecrire"+Tds.getInstance().getCptEcrire()+"\n\n");
             // cas pi l'expression est fausse
-            code.append("ecrire" + Tds.getInstance().getCptEcrie() + ": \n");
-            code.append("la $a0, faux\n");
-            code.append("finecrire"+Tds.getInstance().getCptEcrie()+":\n");
+            code.append("ecrire" + Tds.getInstance().getCptEcrire() + ": \n");
+            code.append("la $a0, faux\n\n");
+            code.append("finecrire"+Tds.getInstance().getCptEcrire()+":\n");
             Tds.getInstance().addCptEcrire();
         }
         code.append("syscall\n");
@@ -69,7 +76,7 @@ public class Ecrire extends Instruction {
         code.append("\n#Saut de ligne\n");
         code.append("li $v0, 4\n"); // Code du print pour le retour à la ligne
         code.append("la $a0, ln\n");  // Saut à la ligne
-        code.append("syscall\n\n");   // Appel du saut de ligne
+        code.append("syscall\n");   // Appel du saut de ligne
         return code.toString();
     }
 

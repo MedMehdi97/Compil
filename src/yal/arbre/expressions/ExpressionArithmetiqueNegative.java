@@ -1,10 +1,10 @@
 package yal.arbre.expressions;
 
-public class ExpressionArithmetiqueNegative extends Expression {
+public class ExpressionArithmetiqueNegative extends ExpressionArithmetique {
 
-    Expression exp;
+    ExpressionArithmetique exp;
 
-    public ExpressionArithmetiqueNegative(int n, Expression exp) {
+    public ExpressionArithmetiqueNegative(int n, ExpressionArithmetique exp) {
         super(n);
         this.exp=exp;
     }

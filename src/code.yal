@@ -1,7 +1,10 @@
 programme idf debut
 entier a;
 entier b;
-b=2;
-a=1;
-si(1<2) alors ecrire 1; ecrire 2; ecrire 3; sinon ecrire 3; finsi
+entier c;
+a=3;
+b=1;
+c=1;
+ecrire non(a>b*2) ou c==1;
+ecrire non(non(a>b*2) ou c==1);
 fin

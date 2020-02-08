@@ -65,11 +65,11 @@ public class ExpressionLogique extends Expression {
             }
             //cas de condition vraie
             string.append("li $v0, 1\n");
-            string.append("b fincond"+Tds.getInstance().getCptBranchement()+"\n");
+            string.append("b fincond"+Tds.getInstance().getCptBranchement()+"\n\n");
             string.append("condf"+Tds.getInstance().getCptBranchement()+": \n");
             //cas de condition fausse
-            string.append("li $v0, 0\n");
-            string.append("fincond"+Tds.getInstance().getCptBranchement()+": \n");
+            string.append("li $v0, 0\n\n");
+            string.append("fincond"+Tds.getInstance().getCptBranchement()+": \n\n");
             Tds.getInstance().addCptBranchement();
 
         }

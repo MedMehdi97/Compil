@@ -98,7 +98,7 @@ class ExpressionArithmetiqueNegative {
    void verfier()
    String toMIPS()
 }
-ExpressionArithmetiqueNegative  -up-|> Expression
+ExpressionArithmetiqueNegative  -up-|> ExpressionArithmetique
 ExpressionArithmetiqueNegative - "1" Expression
 abstract class Constante {
    String cste
@@ -106,8 +106,8 @@ abstract class Constante {
    void verfier()
 }
 
-Constante  -up-|> Expression
-Idf  -up-|> Expression
+Constante  -up-|> ExpressionArithmetique
+Idf  -up-|> ExpressionArithmetique
 
 class ConstanteEntiere {
    ConstanteEntiere(String texte, int n)

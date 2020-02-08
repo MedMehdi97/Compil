@@ -4,7 +4,7 @@ import yal.tds.Tds;
 import yal.tds.entree.EntreeVariable;
 import yal.tds.symbole.Symbole;
 
-public class Idf extends Expression {
+public class Idf extends ExpressionArithmetique {
     private String nom;
     private int deplacement;
 

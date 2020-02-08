@@ -40,7 +40,7 @@ public class Condition extends Instruction {
 
     @Override
     public String toMIPS() {
-        StringBuilder code = new StringBuilder("#Condition\n");
+        StringBuilder code = new StringBuilder("\n#Condition Si\n");
         // Appel de toMIPS de l'expression logique
         code.append(this.exp.toMIPS());
         code.append("addi $sp, $sp, 4\n");
@@ -49,12 +49,12 @@ public class Condition extends Instruction {
         code.append("beqz $v0, sinon" + Tds.getInstance().getCptCodition() + "\n");
         //Appel de la fonction toMIPS pour le bloc alors
         code.append(blocalors.toMIPS());
-        code.append("b finCond"+Tds.getInstance().getCptCodition()+"\n");
+        code.append("b finSi"+Tds.getInstance().getCptCodition()+"\n\n");
         code.append("sinon" + Tds.getInstance().getCptCodition() + ": \n");
         if(blocSinon != null) {
             code.append(this.blocSinon.toMIPS());
         }
-        code.append("finCond"+Tds.getInstance().getCptCodition()+":");
+        code.append("\nfinSi"+Tds.getInstance().getCptCodition()+":\n\n");
         Tds.getInstance().addCptCondition();
 
         return code.toString();

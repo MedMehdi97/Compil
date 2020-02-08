@@ -58,13 +58,13 @@ parser code {:
 
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER, LIRE, EGALE, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, NON, PAROUVRANTE, PARFERMANTE ;
-terminal String    IDF, CSTENTIERE, OPERA, OPERB, OPERLOGIQUEA, OPERET, OPEROU, PLUS, MOINS, OPEREGALE, OPERNEGALE ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER, LIRE, EGALE, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE ;
+terminal String    IDF, CSTENTIERE, OPERA, OPERB, OPERLOGIQUEA, OPERET, OPEROU, PLUS, MOINS, OPEREGALE, OPERNEGALE, NON ;
 
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, LINST, LDEC, CPRG;
-non terminal Expression EXP, EXP1, EXP2;
+non terminal ExpressionArithmetique EXP, EXP1, EXP2;
 non terminal ExpressionLogique EXPLOG, EXPLOG1, EXPLOG2;
 non terminal Instruction DECL_VAR, DECLARATION, INST, DEC;
 
@@ -110,9 +110,9 @@ LINST   ::=     LINST:li  INST:i
                 ;
 
 INST    ::=     ECRIRE EXP:e POINTVIRGULE
-                {: RESULT = new Ecrire(e, eleft + 1, 1) ; :}
+                {: RESULT = new Ecrire(e, eleft + 1) ; :}
          |     ECRIRE EXPLOG:e POINTVIRGULE
-               {: RESULT = new Ecrire(e, eleft + 1, 2) ; :}
+               {: RESULT = new Ecrire(e, eleft + 1) ; :}
          |
                 LIRE IDF:i POINTVIRGULE
                 {:  Idf id=new Idf(ileft +1, i) ;
@@ -152,6 +152,8 @@ EXPLOG ::= EXPLOG:g OPERET:o EXPLOG1:d
                {: RESULT = new ExpressionLogique(gleft+1, g, d, o); :}
          |  EXPLOG:g OPEROU:o EXPLOG1:d
                {: RESULT = new ExpressionLogique(gleft+1, g, d, o); :}
+         |  NON EXPLOG1:e
+            {: RESULT =new ExpressionLogiqueNon(eleft+1, e); :}
          |  EXPLOG1:e
             {: RESULT = e; :}
             ;

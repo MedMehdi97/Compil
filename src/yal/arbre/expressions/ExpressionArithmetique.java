@@ -1,5 +1,8 @@
 package yal.arbre.expressions;
 
+import yal.exceptions.DivisionParZeroException;
+import yal.tds.Tds;
+
 public class ExpressionArithmetique extends Expression {
     /**
      * Constructeur d'une affectation (constante entière ou une variable)
@@ -23,6 +26,11 @@ public class ExpressionArithmetique extends Expression {
     public void verifier() {
         this.expG.verifier();
         this.expD.verifier();
+        //cas division par zéro
+        if (this.oper.equals("/") && (this.expD instanceof ConstanteEntiere)){
+            int cst=Integer.parseInt(this.expD.toString());
+            if (cst==0) Tds.getInstance().ajouterException(new DivisionParZeroException(this.noLigne));
+        }
     }
 
     @Override
@@ -52,6 +60,7 @@ public class ExpressionArithmetique extends Expression {
                 code.append("mflo $v0\n");
                 break;
         }
+        //empiler le resultat dans la pile
         code.append("sw $v0, 0($sp)\n");
         code.append("addi $sp, $sp, -4\n");
         return code.toString();

@@ -55,6 +55,7 @@ public class Condition extends Instruction {
             code.append(this.blocSinon.toMIPS());
         }
         code.append("\nfinSi"+Tds.getInstance().getCptCodition()+":\n\n");
+        //incrémenter le compteur des branchements
         Tds.getInstance().addCptCondition();
 
         return code.toString();

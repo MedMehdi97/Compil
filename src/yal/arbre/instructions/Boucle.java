@@ -44,6 +44,8 @@ public class Boucle extends  Instruction{
         code.append("b tantque" + Tds.getInstance().getCptBoucle() + "\n");
         //etiquete fintantque
         code.append("fintantque" +Tds.getInstance().getCptBoucle()  + ": \n");
+        //incrémenter le compteur des branchements de la boucle
+        Tds.getInstance().addCptBoucle();
         return code.toString();
     }
 }

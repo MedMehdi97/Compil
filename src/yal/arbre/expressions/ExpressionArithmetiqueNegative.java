@@ -24,9 +24,10 @@ public class ExpressionArithmetiqueNegative extends ExpressionArithmetique {
         code.append("lw $v0, 0($sp)\n");
         code.append("li $t8, 2\n");
         code.append("mult $v0, $t8\n");
-        code.append("mflo $t8\n");
+        code.append("mflo $t8\n");   //$t8<-$v0*2
         code.append("lw $v0, 0($sp)\n");
-        code.append("sub $v0, $v0, $t8\n");
+        code.append("sub $v0, $v0, $t8\n"); //$v0<-$v0-2*$v0
+        //empiler le resultat dans la pile
         code.append("sw $v0, 0($sp)\n");
         code.append("addi $sp, $sp, -4\n");
         return code.toString();

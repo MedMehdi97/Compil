@@ -21,7 +21,7 @@ public class Ecrire extends Instruction {
 
     /**
      * Constructeur de la classe Ecrire pour une expression logique
-     * @param e   l'expression arithmétique à afficher
+     * @param e   l'expression logique à afficher
      * @param n   Numéro de la ligne
      */
     public Ecrire (ExpressionLogique e, int n){
@@ -69,6 +69,7 @@ public class Ecrire extends Instruction {
             code.append("ecrire" + Tds.getInstance().getCptEcrire() + ": \n");
             code.append("la $a0, faux\n\n");
             code.append("finecrire"+Tds.getInstance().getCptEcrire()+":\n");
+            //incrémenter le compteur des branchements pour écrire
             Tds.getInstance().addCptEcrire();
         }
         code.append("syscall\n");

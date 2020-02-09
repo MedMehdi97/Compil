@@ -10,6 +10,8 @@ move $s7,$sp
 
 #reservation de l'espace pour une variable
 addi $sp, $sp, -4
+#reservation de l'espace pour une variable
+addi $sp, $sp, -4
 #Affectation
 li $v0, 1
 sw $v0, 0($sp)
@@ -17,48 +19,15 @@ addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
 sw $v0, 0($s7)
-# Boucle Tant que 
-tantque1:
-lw $v0, 0($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-bge $v0, $t8, condf1
-li $v0, 1
-b fincond1
-
-condf1: 
-li $v0, 0
-
-fincond1: 
-
+#Affectation
+li $v0, 2
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-beqz $v0, fintantque1
+sw $v0, -4($s7)
 
 #Instruction Ecrire 
-lw $v0, 0($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-#Affectation
 lw $v0, 0($s7)
 sw $v0, 0($sp)
 addi $sp, $sp, -4
@@ -74,9 +43,14 @@ sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-sw $v0, 0($s7)
-b tantque1
-fintantque1: 
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
 
 end :
 

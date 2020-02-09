@@ -59,7 +59,7 @@ public class Tds {
     public void ajouter(Entree e, Symbole s) {
         for (Entree e1: this.table.keySet()){
             if (e.getNom().equals(e1.getNom())){
-                 listeException.add(new DoubleDeclarationException(e.getLigne(),"Variable doublement déclaré"));
+                 listeException.add(new DoubleDeclarationException(e.getLigne(), " Variable "+e.getNom()+" doublement déclaré"));
             }
         }
         this.table.put(e,s);
@@ -77,7 +77,7 @@ public class Tds {
                 return table.get(en);
             }
         }
-        listeException.add(new VariableNonDeclareeException(e.getLigne(), "Variable non déclarée"));
+        listeException.add(new VariableNonDeclareeException(e.getLigne(), "Variable "+e.getNom()+" non déclarée"));
         return new SymboleVariable(-1);
     }
 
@@ -153,16 +153,25 @@ public class Tds {
     }
 
     /**
-     * getteur de cptBoucle
+     * retourne cptBoucle
      * @return
      */
-    public int getCptBoucle(){ return cptNonLog;}
-
-    /**
-     * incrémente la variable cptBoucle
-     */
-    public void addCptBoucle(){
-        this.cptBoucle+=1;
+    public int getCptBoucle() {
+        return cptBoucle;
     }
 
+    /**
+     * Ajoute une exception à la liste
+     * @param e AnalyseSemantiqueException
+     */
+    public void ajouterException(AnalyseSemantiqueException e){
+        this.listeException.add(e);
+    }
+
+    /**
+     * Incrémente cptBoucle
+     */
+    public void addCptBoucle() {
+        this.cptBoucle+=1;
+    }
 }

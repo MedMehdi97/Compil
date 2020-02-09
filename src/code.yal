@@ -1,8 +1,8 @@
 programme idf debut
 entier a;
+entier b;
 a=1;
-tantque a<5 repeter
-  ecrire a;
-  a=a+1;
-fintantque
+b=2;
+ecrire a+1;
+
 fin

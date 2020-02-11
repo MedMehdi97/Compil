@@ -27,7 +27,7 @@ public class ExpressionArithmetique extends Expression {
         this.expG.verifier();
         this.expD.verifier();
         //cas division par zéro
-        if (this.oper.equals("/") && (this.expD instanceof ConstanteEntiere)){
+        if (this.oper.equals("/") && (this.expD.toString().equals("0"))){
             int cst=Integer.parseInt(this.expD.toString());
             if (cst==0) Tds.getInstance().ajouterException(new DivisionParZeroException(this.noLigne));
         }
@@ -56,13 +56,26 @@ public class ExpressionArithmetique extends Expression {
                 code.append("mflo $v0\n");
                 break;
             case "/":
+                code.append("beq $t8, 0, divZero"+Tds.getInstance().getCptDivZer()+"\n");
                 code.append("div $v0, $t8\n");
-                code.append("mflo $v0\n");
+                //cas ou l'expression droite n'est pas égale à zéro
+                code.append("mflo $v0\n\n");
+                code.append("b finDivZero"+Tds.getInstance().getCptDivZer()+"\n");
+                code.append("divZero"+Tds.getInstance().getCptDivZer()+":\n");
+                code.append("li $v0, 4\n");
+                code.append("la $a0, ErreurDivisionParZero\n");
+                code.append("syscall\n");
+                code.append("b end\n");
+                code.append("finDivZero"+Tds.getInstance().getCptDivZer()+":\n");
+                Tds.getInstance().addCptDivZer();
                 break;
         }
         //empiler le resultat dans la pile
         code.append("sw $v0, 0($sp)\n");
         code.append("addi $sp, $sp, -4\n");
         return code.toString();
+    }
+    public String toString(){
+        return "";
     }
 }

@@ -3,6 +3,9 @@ entier a;
 entier b;
 a=1;
 b=2;
-ecrire a+1;
-
+b=6/2;
+ecrire b;
+a=2;
+b=a/(3-a);
+ecrire b;
 fin

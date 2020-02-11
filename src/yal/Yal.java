@@ -26,6 +26,7 @@ public class Yal {
             flot.println(".data\nln : 	.asciiz \"\\n\"");  // Constante pour le saut de ligne
             flot.println("vrai : 	.asciiz \"vrai\"");
             flot.println("faux : 	.asciiz \"faux\"");
+            flot.println("ErreurDivisionParZero : 	.asciiz \"ErreurDivisionParZero\"");
             flot.println("\n.text\nmain :\n"); // Début du programme MIPS
             flot.println("move $s7,$sp\n");
             flot.println(arbre.toMIPS());

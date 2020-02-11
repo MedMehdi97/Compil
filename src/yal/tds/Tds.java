@@ -20,6 +20,7 @@ public class Tds {
     private int cptCodition=1;
     private int cptNonLog=1;
     private int cptBoucle=1;
+    private int cptDivZer=1;
 
     /**
      * Constructeur vide
@@ -173,5 +174,18 @@ public class Tds {
      */
     public void addCptBoucle() {
         this.cptBoucle+=1;
+    }
+
+
+    /**
+     * Getteur de cptDivZero
+     * @return
+     */
+    public int getCptDivZer(){
+        return this.cptDivZer;
+    }
+
+    public void addCptDivZer() {
+        this.cptDivZer+=1;
     }
 }

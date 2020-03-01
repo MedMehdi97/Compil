@@ -20,4 +20,5 @@ public abstract class Entree {
     public String getNom() {
         return this.nom;
     }
+    public abstract int entreeType();
 }

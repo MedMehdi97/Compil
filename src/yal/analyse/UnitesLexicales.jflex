@@ -59,6 +59,8 @@ operateurCompA = (<|>)
 "tantque"              { return symbol(CodesLexicaux.TANTQUE); }
 "repeter"              { return symbol(CodesLexicaux.REPETER); }
 "fintantque"           { return symbol(CodesLexicaux.FINTANTQUE); }
+"fonction"             { return symbol(CodesLexicaux.FONCTION); }
+"retourne"             { return symbol(CodesLexicaux.RETOURNE); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 "="                    { return symbol(CodesLexicaux.EGALE); }

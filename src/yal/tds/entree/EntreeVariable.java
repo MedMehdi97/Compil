@@ -12,4 +12,9 @@ public class EntreeVariable extends Entree {
     public EntreeVariable(String n, int l) {
         super(n, l);
     }
+     //Retourne 0 pour le type variable
+    @Override
+    public int entreeType() {
+        return 0;
+    }
 }

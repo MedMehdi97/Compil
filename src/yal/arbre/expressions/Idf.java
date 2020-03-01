@@ -25,6 +25,10 @@ public class Idf extends ExpressionArithmetique {
     public void verifier() {
 
             Symbole s = Tds.getInstance().identifier(new EntreeVariable(this.nom, this.getNoLigne()));
+            if (s.getDeplacement()==-1 && Tds.getInstance().getNumBlocTableLocale()!=0){
+                //vérifier si la variable est déclaré dans le bloc main si on est dans un autre bloc
+                s=Tds.getInstance().identifierMain(new EntreeVariable(this.nom,this.noLigne));
+            }
             this.deplacement = s.getDeplacement();
     }
 

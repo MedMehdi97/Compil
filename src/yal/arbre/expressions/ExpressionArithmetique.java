@@ -12,6 +12,7 @@ public class ExpressionArithmetique extends Expression {
         super(n);
     }
     /**
+     *
      * Constructeur d'une expression
      * @param n Numéro de la ligne
      * @param expG opérand gauche

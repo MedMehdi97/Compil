@@ -1,11 +1,21 @@
 programme idf debut
 entier a;
 entier b;
-a=1;
-b=2;
-b=6/2;
-ecrire b;
+entier c;
+entier d;
+fonction additionAB ( ) debut
 a=2;
-b=a/(3-a);
+b=4;
+d=test2();
+retourne 1;
+fin
+fonction test2() debut
+c=5;
+retourne 3;
+fin
+ecrire additionAB();
+ecrire a;
+ecrire d;
 ecrire b;
+ecrire c;
 fin

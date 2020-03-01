@@ -1,3 +1,4 @@
+*****************Package exceptions*************************
 @startuml
 skinparam class {
 BackgroundColor AliceBlue
@@ -12,6 +13,8 @@ skinparam stereotypeABackgroundColor Yellow
 hide stereotype
 hide empty member
 
+package exceptions {
+
 abstract class AnalyseException
 
 AnalyseException -up-|> RuntimeException
@@ -21,7 +24,27 @@ AnalyseSyntaxiqueException -up-|> AnalyseException
 AnalyseSemantiqueException -up-|> AnalyseException
 DoubleDeclarationException -up-|> AnalyseSemantiqueException
 VariableNonDeclareeException -up-|> AnalyseSemantiqueException
+DivisionParZeroException -up-|> AnalyseSemantiqueException
+}
+@enduml
 
+*****************Package arbre*************************
+
+@startuml
+skinparam class {
+BackgroundColor AliceBlue
+ArrowColor DarkTurquoise
+BorderColor Turquoise
+}
+
+skinparam stereotypeCBackgroundColor DarkTurquoise
+skinparam stereotypeIBackgroundColor Magenta
+skinparam stereotypeABackgroundColor Yellow
+
+hide stereotype
+hide empty member
+
+package arbre {
 abstract class ArbreAbstrait {
    int noLigne
    protected ArbreAbstrait(int n)
@@ -51,12 +74,13 @@ class Declarer {
 Declarer  -up-|> Instruction
 
 class Ecrire {
-   Ecrire(Expression e, int n)
+   Ecrire(int n)
    void verifier()
    String toMIPS()
 }
 
 Ecrire  -up-|> Instruction
+
 class Lire {
    Lire(int n, Idf idf)
    void verifier()
@@ -65,8 +89,9 @@ class Lire {
 
 Lire  -up-|> Instruction
 Lire - "1" Idf
+
 class Affectation {
-   Lire(int n, Idf idf, Expression e)
+   Affectation(int n, Idf idf, Expression e)
    void verifier()
    String toMIPS()
 }
@@ -75,23 +100,39 @@ Affectation  -up-|> Instruction
 Affectation - "1" Idf
 Affectation - "1" Expression
 
+class Boucle {
+   Boucle(int n,ExpressionLogique exp, ArbreAbstrait listInst)
+   void verifier()
+   String toMIPS()
+}
+Boucle  -up-|> Instruction
+Boucle -up- "*" Instruction
+
+class Condition {
+   Boucle(int n,ExpressionLogique exp, ArbreAbstrait BlocAlors, ArbreAbstrait BlocSinon)
+   Boucle(int n,ExpressionLogique exp, ArbreAbstrait BlocAlors)
+   void verifier()
+   String toMIPS()
+}
+Condition  -up-|> Instruction
+Condition -up- "*" Instruction
+
 abstract class Expression {
-   protected Expression expG
-   protected Expression expD
-   protected String oper
+   protected Expression expD;
+   protected Expression expG;
+   protected String oper;
    protected Expression(int n)
-   public Expression(int n, Expression expG, Expression expD, String oper)
 }
 
 Expression  -up-|> ArbreAbstrait
+Ecrire - "1" Expression
+
 class ExpressionArithmetique {
-   protected Expression(int n)
-   public Expression(int n, Expression expG, Expression expD, String oper)
+   public ExpressionArithmetique(int n, Expression expG, Expression expD, String oper)
    void verfier()
    String toMIPS()
 }
 ExpressionArithmetique  -up-|> Expression
-Ecrire - "1" Expression
 
 class ExpressionArithmetiqueNegative {
    protected Expression(int n, Expression e)
@@ -99,7 +140,32 @@ class ExpressionArithmetiqueNegative {
    String toMIPS()
 }
 ExpressionArithmetiqueNegative  -up-|> ExpressionArithmetique
-ExpressionArithmetiqueNegative - "1" Expression
+ExpressionArithmetiqueNegative - "1" ExpressionArithmetique
+
+class ExpressionLogique {
+   public ExpressionLogique(int n, Expression expG, Expression expD, String oper)
+   void verfier()
+   String toMIPS()
+}
+
+ExpressionLogique  -up-|> Expression
+
+class ExpressionLogiqueNon {
+   public ExpressionLogiqueNon(Expression exp)
+   void verfier()
+   String toMIPS()
+}
+ExpressionLogiqueNon  -up-|> ExpressionLogique
+ExpressionLogiqueNon - "1" ExpressionLogique
+
+class Idf {
+   Idf(int n, String nom)
+   void verifier()
+   String toMIPS()
+   int getDeplacement()
+}
+Idf  -up-|> ExpressionArithmetique
+
 abstract class Constante {
    String cste
    protected Constante(String texte, int n)
@@ -107,7 +173,6 @@ abstract class Constante {
 }
 
 Constante  -up-|> ExpressionArithmetique
-Idf  -up-|> ExpressionArithmetique
 
 class ConstanteEntiere {
    ConstanteEntiere(String texte, int n)
@@ -115,13 +180,25 @@ class ConstanteEntiere {
 }
 
 ConstanteEntiere  -up-|> Constante
-class Idf {
-   Idf(int n, String nom)
-   void verifier()
-   String toMIPS()
-   int getDeplacement()
+}
+@enduml
+
+***************** Package tds ******************************
+@startuml
+skinparam class {
+BackgroundColor AliceBlue
+ArrowColor DarkTurquoise
+BorderColor Turquoise
 }
 
+skinparam stereotypeCBackgroundColor DarkTurquoise
+skinparam stereotypeIBackgroundColor Magenta
+skinparam stereotypeABackgroundColor Yellow
+
+hide stereotype
+hide empty member
+
+package tds {
 abstract class Entree {
    String nom
    int noLigne
@@ -151,4 +228,6 @@ int getTailleZoneVariable()
 }
 Tds -up- "*" Entree
 Tds -up- "*" Symbole
+
+}
 @enduml

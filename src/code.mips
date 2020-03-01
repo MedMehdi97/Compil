@@ -11,1117 +11,163 @@ move $s7,$sp
 
 #reservation de l'espace pour une variable
 addi $sp, $sp, -4
-
-#Instruction Ecrire 
-li $v0, 25
-sw $v0, 0($sp)
+#reservation de l'espace pour une variable
 addi $sp, $sp, -4
-li $v0, 25
-sw $v0, 0($sp)
+#reservation de l'espace pour une variable
 addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero1
-div $v0, $t8
-mflo $v0
-
-b finDivZero1
-divZero1:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero1:
-sw $v0, 0($sp)
+#reservation de l'espace pour une variable
 addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
+#Declaration fonction
+j fonctionjmp1
+additionAB:
+sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s2, ($sp)
+addi $sp, $sp, -4
 li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 5
-sw $v0, 0($sp)
+sw $v0, ($sp)
 addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 25
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero2
-div $v0, $t8
-mflo $v0
-
-b finDivZero2
-divZero2:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero2:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 13
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 25
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero3
-div $v0, $t8
-mflo $v0
-
-b finDivZero3
-divZero3:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero3:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 13
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-sub $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
+move $s2, $sp
+#Affectation
 li $v0, 2
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
 lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-sub $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-sub $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
+sw $v0, 0($s7)
+#Affectation
 li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 5
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
+sw $v0, -4($s7)
+#Affectation
+jal test2
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -12($s7)
+#Retour de la fonction
+li $v0, 1
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+addi $sp,$sp, 8 
+lw $t8, 0($sp)
+addi $sp,$sp, 4
+lw $ra,($sp)
+move $s2, $t8
+sw $v0, ($sp)
+addi $sp,$sp, -4
+jr $ra
+fonctionjmp1:
+#Declaration fonction
+j fonctionjmp2
+test2:
+sw $ra, ($sp)
+addi $sp, $sp, -4
+sw $s2, ($sp)
 addi $sp, $sp, -4
 li $v0, 2
-sw $v0, 0($sp)
+sw $v0, ($sp)
 addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero4
-div $v0, $t8
-mflo $v0
-
-b finDivZero4
-divZero4:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero4:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-sub $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-sub $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 16
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero5
-div $v0, $t8
-mflo $v0
-
-b finDivZero5
-divZero5:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero5:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero6
-div $v0, $t8
-mflo $v0
-
-b finDivZero6
-divZero6:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero6:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero7
-div $v0, $t8
-mflo $v0
-
-b finDivZero7
-divZero7:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero7:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-sub $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 100
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero8
-div $v0, $t8
-mflo $v0
-
-b finDivZero8
-divZero8:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero8:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero9
-div $v0, $t8
-mflo $v0
-
-b finDivZero9
-divZero9:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero9:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero10
-div $v0, $t8
-mflo $v0
-
-b finDivZero10
-divZero10:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero10:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 100
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero11
-div $v0, $t8
-mflo $v0
-
-b finDivZero11
-divZero11:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero11:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero12
-div $v0, $t8
-mflo $v0
-
-b finDivZero12
-divZero12:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero12:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-beq $t8, 0, divZero13
-div $v0, $t8
-mflo $v0
-
-b finDivZero13
-divZero13:
-li $v0, 4
-la $a0, ErreurDivisionParZero
-syscall
-b end
-finDivZero13:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 26
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-ble $v0, $t8, condf1
-li $v0, 1
-b fincond1
-
-condf1: 
-li $v0, 0
-
-fincond1: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4 
-lw $v0, 0($sp)
-beqz $v0, nonLog1
-li $v0, 0
-b finNon1
-
-nonLog1:
-li $v0, 1 
-finNon1:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $t8, $v0
-li $v0, 4
-beqz $t8, ecrire1
-la $a0, vrai
-b finecrire1
-
-ecrire1: 
-la $a0, faux
-
-finecrire1:
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-mult $v0, $t8
-mflo $v0
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 24
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-bge $v0, $t8, condf2
-li $v0, 1
-b fincond2
-
-condf2: 
-li $v0, 0
-
-fincond2: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4 
-lw $v0, 0($sp)
-beqz $v0, nonLog2
-li $v0, 0
-b finNon2
-
-nonLog2:
-li $v0, 1 
-finNon2:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $t8, $v0
-li $v0, 4
-beqz $t8, ecrire2
-la $a0, vrai
-b finecrire2
-
-ecrire2: 
-la $a0, faux
-
-finecrire2:
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-bne $v0, $t8, condf3
-li $v0, 1
-b fincond3
-
-condf3: 
-li $v0, 0
-
-fincond3: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 3
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-ble $v0, $t8, condf4
-li $v0, 1
-b fincond4
-
-condf4: 
-li $v0, 0
-
-fincond4: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-or $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 6
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-ble $v0, $t8, condf5
-li $v0, 1
-b fincond5
-
-condf5: 
-li $v0, 0
-
-fincond5: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-and $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4 
-lw $v0, 0($sp)
-beqz $v0, nonLog3
-li $v0, 0
-b finNon3
-
-nonLog3:
-li $v0, 1 
-finNon3:
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $t8, $v0
-li $v0, 4
-beqz $t8, ecrire3
-la $a0, vrai
-b finecrire3
-
-ecrire3: 
-la $a0, faux
-
-finecrire3:
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-bne $v0, $t8, condf6
-li $v0, 1
-b fincond6
-
-condf6: 
-li $v0, 0
-
-fincond6: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 3
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-ble $v0, $t8, condf7
-li $v0, 1
-b fincond7
-
-condf7: 
-li $v0, 0
-
-fincond7: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-or $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 6
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-ble $v0, $t8, condf8
-li $v0, 1
-b fincond8
-
-condf8: 
-li $v0, 0
-
-fincond8: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-and $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $t8, $v0
-li $v0, 4
-beqz $t8, ecrire4
-la $a0, vrai
-b finecrire4
-
-ecrire4: 
-la $a0, faux
-
-finecrire4:
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 3
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-ble $v0, $t8, condf9
-li $v0, 1
-b fincond9
-
-condf9: 
-li $v0, 0
-
-fincond9: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 6
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-bge $v0, $t8, condf10
-li $v0, 1
-b fincond10
-
-condf10: 
-li $v0, 0
-
-fincond10: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-and $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-bne $v0, $t8, condf11
-li $v0, 1
-b fincond11
-
-condf11: 
-li $v0, 0
-
-fincond11: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-or $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $t8, $v0
-li $v0, 4
-beqz $t8, ecrire5
-la $a0, vrai
-b finecrire5
-
-ecrire5: 
-la $a0, faux
-
-finecrire5:
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-li $v0, 5
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 6
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-ble $v0, $t8, condf12
-li $v0, 1
-b fincond12
-
-condf12: 
-li $v0, 0
-
-fincond12: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-bne $v0, $t8, condf13
-li $v0, 1
-b fincond13
-
-condf13: 
-li $v0, 0
-
-fincond13: 
-
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-or $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $t8, $v0
-li $v0, 4
-beqz $t8, ecrire6
-la $a0, vrai
-b finecrire6
-
-ecrire6: 
-la $a0, faux
-
-finecrire6:
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
+move $s2, $sp
 #Affectation
 li $v0, 5
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-sw $v0, 0($s7)
+sw $v0, -8($s7)
+#Retour de la fonction
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+addi $sp,$sp, 8 
+lw $t8, 0($sp)
+addi $sp,$sp, 4
+lw $ra,($sp)
+move $s2, $t8
+sw $v0, ($sp)
+addi $sp,$sp, -4
+jr $ra
+fonctionjmp2:
+
+#Instruction Ecrire 
+jal additionAB
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Instruction Ecrire 
+lw $v0, 0($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Instruction Ecrire 
+lw $v0, -12($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Instruction Ecrire 
+lw $v0, -4($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Instruction Ecrire 
+lw $v0, -8($s7)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
 
 end :
 

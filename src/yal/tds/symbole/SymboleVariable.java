@@ -16,4 +16,11 @@ public class SymboleVariable extends Symbole {
     public int getDeplacement() {
         return this.dep;
     }
+
+    @Override
+    public int getNumBloc() {
+        return 0;
+    }
+
+
 }

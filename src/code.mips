@@ -17,6 +17,8 @@ addi $sp, $sp, -4
 addi $sp, $sp, -4
 #reservation de l'espace pour une variable
 addi $sp, $sp, -4
+#reservation de l'espace pour une variable
+addi $sp, $sp, -4
 #Declaration fonction
 j fonctionjmp1
 additionAB:
@@ -47,6 +49,32 @@ jal test2
 addi $sp, $sp, 4
 lw $v0, 0($sp)
 sw $v0, -12($s7)
+
+#Condition Si
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+bge $v0, $t8, condf1
+li $v0, 1
+b fincond1
+
+condf1: 
+li $v0, 0
+
+fincond1: 
+
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+beqz $v0, sinon1
 #Retour de la fonction
 li $v0, 1
 sw $v0, 0($sp)
@@ -61,6 +89,26 @@ move $s2, $t8
 sw $v0, ($sp)
 addi $sp,$sp, -4
 jr $ra
+b finSi1
+
+sinon1: 
+#Retour de la fonction
+li $v0, 2
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp,$sp, 4
+lw $v0, 0($sp)
+addi $sp,$sp, 8 
+lw $t8, 0($sp)
+addi $sp,$sp, 4
+lw $ra,($sp)
+move $s2, $t8
+sw $v0, ($sp)
+addi $sp,$sp, -4
+jr $ra
+
+finSi1:
+
 fonctionjmp1:
 #Declaration fonction
 j fonctionjmp2

@@ -25,6 +25,10 @@ AnalyseSemantiqueException -up-|> AnalyseException
 DoubleDeclarationException -up-|> AnalyseSemantiqueException
 VariableNonDeclareeException -up-|> AnalyseSemantiqueException
 DivisionParZeroException -up-|> AnalyseSemantiqueException
+FonctionNonDeclareeException -up-> AnalyseSemantiqueException
+RetourneException -up-> AnalyseSemantiqueException
+FonctionRecursiveException -up-> AnalyseSemantiqueException
+
 }
 @enduml
 
@@ -180,6 +184,32 @@ class ConstanteEntiere {
 }
 
 ConstanteEntiere  -up-|> Constante
+
+class AppelFonction {
+  String nom
+  AppelFonction(int n, String nom)
+  void verifier()
+  String toMips()
+}
+
+AppelFonction -up-|> ExpressionArithmetique
+class DeclarerFonction {
+   protected String nom
+   protected int numBloc
+   DeclarerFonction(int n, String nom, ArbreAbstrait listeInstructions)
+   void verifier()
+   String toMips()
+}
+DeclarerFonction -up-|> Instruction
+DeclarerFonction -up- "*" Instruction
+
+class Retourne {
+ protected ExpressionArithmetique exp;
+ Retourne(int n, ExpressionArithmetique exp)
+ void verifier()
+  String toMips()
+}
+Retourne -up-|> Instruction
 }
 @enduml
 
@@ -202,10 +232,14 @@ package tds {
 abstract class Entree {
    String nom
    int noLigne
+   int getLigne()
+   int getNom()
+   int entreeType()
 }
 
 abstract class Symbole {
    int getDeplacement()
+   int getNumBloc()
 }
 
 class EntreeVariable {
@@ -218,16 +252,47 @@ class SymboleVariable {
    SymboleVariable(int dep)
 }
 SymboleVariable  -up-|> Symbole
+
+class EntreeFonction {
+   EntreeFonction(String n, int l)
+}
+EntreeFonction  -up-|> Entree
+
+class SymboleFonction {
+   int numBloc
+   SymboleVariable(int numBloc)
+}
+SymboleFonction  -up-|> Symbole
+
 class Tds << (S,#FF7700) Singleton >>{
 int cptDepl
 Tds()
 Tds getInstance()
 void ajouter(Entree e, Symbole s)
 Symbole identifier(Entree e)
+void entreeBloc()
+void entreeBloc(int numBloc)
+void sortieBloc()
+void ajouterMain(Entree e, Symbole s)
+void identifierMain(Entree e)
+void ajouterException(AnalyseSemantiqueException e)
+void declencherException()
 int getTailleZoneVariable()
 }
-Tds -up- "*" Entree
-Tds -up- "*" Symbole
+Tds -up- "*" TableLocal
 
+class TableLocal {
+int numBloc
+int cptDepl
+int nbRetour
+TableLocal(int n, TableLocal tablePere)
+void ajouter(Entree e, Symbole s)
+Symbole identifier(Entree e)
+void AjouterFils(TableLocal fils)
+
+}
+TableLocal -up- "*" Entree
+TableLocal -up- "*" Symbole
+TableLocal -up- "*" TableLocal
 }
 @enduml

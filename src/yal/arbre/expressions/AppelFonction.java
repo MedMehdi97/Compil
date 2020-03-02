@@ -1,5 +1,6 @@
 package yal.arbre.expressions;
 
+import yal.exceptions.FonctionRecursiveException;
 import yal.tds.Tds;
 import yal.tds.entree.EntreeFonction;
 import yal.tds.symbole.Symbole;
@@ -14,6 +15,10 @@ public class AppelFonction extends ExpressionArithmetique {
     @Override
     public void verifier() {
         Symbole s= Tds.getInstance().identifierMain(new EntreeFonction(this.nom,this.noLigne));
+        //Vérifier si la fonction n'appelle pas elle même
+        if(s.getNumBloc()==Tds.getInstance().getNumBlocTableLocale()){
+            Tds.getInstance().ajouterException(new FonctionRecursiveException(this.noLigne," Appel recursive de la Fonction " + this.nom ));
+        }
     }
 
     @Override

@@ -3,11 +3,12 @@ entier a;
 entier b;
 entier c;
 entier d;
+entier e;
 fonction additionAB ( ) debut
 a=2;
 b=4;
 d=test2();
-retourne 1;
+si 1<2 alors retourne 1; sinon retourne 2; finsi
 fin
 fonction test2() debut
 c=5;

@@ -189,7 +189,7 @@ DECL_VAR ::=    ENTIER IDF:i
                 :}
                 ;
 
-DECL_FONC ::=  FONCTIONI IDF:i PAROUVRANTE PARFERMANTE DEBUT LINST:li FIN
+DECL_FONC ::=  FONCTIONI IDF:i PARAM DEBUT LINST:li FIN
                {:
                     EntreeFonction e= new EntreeFonction(i, ileft +1);
                     SymboleFonction s= new SymboleFonction(Tds.getInstance().getNumBlocTableLocale());

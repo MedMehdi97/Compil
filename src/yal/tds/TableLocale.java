@@ -43,8 +43,11 @@ public class TableLocale {
                 //On test le type de l'entrée
                 if (e.entreeType()==0) {
                     Tds.getInstance().ajouterException(new DoubleDeclarationException(e.getLigne(), " Variable " + e.getNom() + " doublement déclaré"));
-                }else {
-                    Tds.getInstance().ajouterException(new DoubleDeclarationException(e.getLigne(), " Fonction " + e.getNom() + " doublement déclaré"));
+                }else{
+                    //Vérifier le nombre de parametres de la fonction
+                    if (e.getNbParam()==en.getNbParam()) {
+                        Tds.getInstance().ajouterException(new DoubleDeclarationException(e.getLigne(), " Fonction " + e.getNom() + " doublement déclaré"));
+                    }
                 }
             }
         }
@@ -61,7 +64,8 @@ public class TableLocale {
     public Symbole identifier(Entree e){
         for (Entree en: table.keySet()){
             if ((en.getNom().equals(e.getNom()))&&(e.entreeType()==en.entreeType())){
-                return table.get(en);
+                //vérifier le nombre de paramètres
+                if (e.getNbParam()==en.getNbParam()){return table.get(en);}
             }
         }
         if (e.entreeType()==0) {

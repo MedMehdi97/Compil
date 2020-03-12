@@ -21,4 +21,5 @@ public abstract class Entree {
         return this.nom;
     }
     public abstract int entreeType();
+    public abstract int getNbParam();
 }

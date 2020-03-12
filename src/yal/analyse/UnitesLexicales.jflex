@@ -76,6 +76,8 @@ operateurCompA = (<|>)
 "("                    { return symbol(CodesLexicaux.PAROUVRANTE); }
 ")"                    { return symbol(CodesLexicaux.PARFERMANTE); }
 
+","                    { return symbol(CodesLexicaux.VIRGULE); }
+
 
 {operateurCompA}        { return symbol(CodesLexicaux.OPERLOGIQUEA, yytext()); }
 

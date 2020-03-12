@@ -17,4 +17,9 @@ public class EntreeVariable extends Entree {
     public int entreeType() {
         return 0;
     }
+
+    @Override
+    public int getNbParam() {
+        return -1;
+    }
 }

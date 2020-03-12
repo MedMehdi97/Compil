@@ -58,16 +58,18 @@ parser code {:
 
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER, LIRE, EGALE, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, FONCTION, RETOURNE ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER, LIRE, EGALE, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, FONCTION, RETOURNE, VIRGULE ;
 terminal String    IDF, CSTENTIERE, OPERB, OPERLOGIQUEA, OPERET, OPEROU, PLUS, MOINS, OPEREGALE, OPERNEGALE, NON ;
 
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, LDEC, CPRG, PARAM, LDECF, CFONC;
-non terminal ExpressionArithmetique EXP, EXP1, EXP2;
+non terminal ArbreAbstrait PROG, LINST, LDEC, CPRG, LDECF, CFONC;
+non terminal ExpressionArithmetique EXP, EXP1, EXP2, APPELFONC;
 non terminal ExpressionLogique EXPLOG, EXPLOG1, EXPLOG2;
 non terminal Instruction DECL_VAR, INST, DEC, DECL_FONC, DECF;
 non terminal String FONCTIONI;
+non terminal Integer LPARAM, PARAM;
+non terminal ArrayList<ExpressionArithmetique> PAR_EFF;
 
 /* ----------------------------Grammar Section-------------------- */
 
@@ -153,8 +155,30 @@ EXP2   ::= PAROUVRANTE EXP:e PARFERMANTE
                {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}
          | IDF:i
                {: RESULT = new Idf(ileft + 1, i) ; :}
-         | IDF:i PAROUVRANTE PARFERMANTE
-                 {: RESULT = new AppelFonction(ileft + 1, i); :}
+         | APPELFONC:a
+                 {: RESULT = a; :}
+               ;
+
+APPELFONC ::= IDF:i PAROUVRANTE PARFERMANTE
+              {: RESULT = new AppelFonction(ileft + 1, i, new ArrayList<ExpressionArithmetique>()); :}
+              |
+              IDF:i PAROUVRANTE PAR_EFF:li PARFERMANTE
+              {:
+                RESULT = new AppelFonction(ileft + 1, i, li);
+              :}
+              ;
+              
+PAR_EFF ::=  EXP:e VIRGULE PAR_EFF:li
+             {:
+                 li.add(e);
+                 RESULT = li;
+             :}
+             |
+               EXP:e
+               {: ArrayList<ExpressionArithmetique> li = new ArrayList<>();
+                  li.add(e);
+                  RESULT = li;
+               :}
                ;
 
 EXPLOG ::= EXPLOG:g OPERET:o EXPLOG1:d
@@ -189,17 +213,38 @@ DECL_VAR ::=    ENTIER IDF:i
                 :}
                 ;
 
-DECL_FONC ::=  FONCTIONI IDF:i PARAM DEBUT CFONC:li FIN
+DECL_FONC ::=  FONCTIONI IDF:i PARAM:j DEBUT CFONC:li FIN
                {:
-                    EntreeFonction e= new EntreeFonction(i, ileft +1);
+                    EntreeFonction e= new EntreeFonction(i, ileft +1, j);
                     SymboleFonction s= new SymboleFonction(Tds.getInstance().getNumBlocTableLocale());
                     Tds.getInstance().ajouterMain(e,s);
-                    RESULT = new DeclarerFonction(ileft + 1, i, li);
+                    RESULT = new DeclarerFonction(ileft + 1, i, li, j);
                :}
                ;
 
 PARAM ::= PAROUVRANTE PARFERMANTE
             {:
+               RESULT=0;
+            :}
+          |
+            PAROUVRANTE LPARAM:li PARFERMANTE
+            {:
+                RESULT=li;
+            :}
+            ;
+LPARAM ::= ENTIER IDF:i POINTVIRGULE LPARAM:li
+            {:
+                EntreeVariable e = new EntreeVariable(i, ileft + 1);
+                SymboleVariable s= new SymboleVariable(Tds.getInstance().getZoneVariableTableLocale());
+                Tds.getInstance().ajouter(e, s);
+                RESULT=li+1;
+            :}
+          |
+            ENTIER IDF:i
+            {:   EntreeVariable e = new EntreeVariable(i, ileft + 1);
+                 SymboleVariable s= new SymboleVariable(Tds.getInstance().getZoneVariableTableLocale());
+                 Tds.getInstance().ajouter(e, s);
+                 RESULT= 1;
             :}
             ;
 

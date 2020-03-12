@@ -2,28 +2,23 @@ programme idf debut
 entier a;
 entier b;
 entier c;
-fonction AB ( ) debut
-entier a;
-entier b;
-a=2;
-b=3;
-ecrire a;
-ecrire b;
-retourne B();
+fonction AB () debut
+retourne 1;
 fin
-fonction B() debut
-entier a;
-entier b;
-a=4;
-b=5;
-ecrire a;
-ecrire b;
-retourne 5;
+fonction AB (entier a; entier b) debut
+retourne a+b;
 fin
-a=6;
-b=7;
-c=AB();
+fonction AB (entier a; entier b; entier c) debut
+retourne a+b+c+AB();
+fin
+c=5;
+a=AB(1,2);
 ecrire a;
+b=AB(a,1);
 ecrire b;
 ecrire c;
+c=AB(1,2,3);
+ecrire c;
+b=AB();
+ecrire b;
 fin

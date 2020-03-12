@@ -19,7 +19,7 @@ public class SymboleVariable extends Symbole {
 
     @Override
     public int getNumBloc() {
-        return 0;
+        return -1;
     }
 
 

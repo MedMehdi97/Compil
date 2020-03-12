@@ -63,10 +63,10 @@ terminal String    IDF, CSTENTIERE, OPERB, OPERLOGIQUEA, OPERET, OPEROU, PLUS, M
 
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, LDEC, CPRG, PARAM;
+non terminal ArbreAbstrait PROG, LINST, LDEC, CPRG, PARAM, LDECF, CFONC;
 non terminal ExpressionArithmetique EXP, EXP1, EXP2;
 non terminal ExpressionLogique EXPLOG, EXPLOG1, EXPLOG2;
-non terminal Instruction DECL_VAR, INST, DEC, DECL_FONC;
+non terminal Instruction DECL_VAR, INST, DEC, DECL_FONC, DECF;
 non terminal String FONCTIONI;
 
 /* ----------------------------Grammar Section-------------------- */
@@ -189,7 +189,7 @@ DECL_VAR ::=    ENTIER IDF:i
                 :}
                 ;
 
-DECL_FONC ::=  FONCTIONI IDF:i PARAM DEBUT LINST:li FIN
+DECL_FONC ::=  FONCTIONI IDF:i PARAM DEBUT CFONC:li FIN
                {:
                     EntreeFonction e= new EntreeFonction(i, ileft +1);
                     SymboleFonction s= new SymboleFonction(Tds.getInstance().getNumBlocTableLocale());
@@ -207,3 +207,25 @@ FONCTIONI ::= FONCTION
               {:    Tds.getInstance().entreeBloc();
               :}
               ;
+
+CFONC ::= LDECF:ld LINST:li
+          {: ((BlocDInstructions)ld).ajouter(li) ;
+             RESULT = ld ; :}
+        |
+          LINST:li
+          {: RESULT =li; :}
+          ;
+
+LDECF   ::=     LDECF:li  DECF:i
+                {: ((BlocDInstructions)li).ajouter(i) ;
+                   RESULT = li ; :}
+        |
+                DECF:i
+                {: BlocDInstructions b = new BlocDInstructions(ileft + 1) ;
+                   b.ajouter(i) ;
+                   RESULT = b ; :}
+                ;
+
+DECF ::=  DECL_VAR:d POINTVIRGULE
+          {: RESULT = d; :}
+          ;

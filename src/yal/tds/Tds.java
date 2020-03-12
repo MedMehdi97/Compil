@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 public class Tds {
     private static Tds instance = new Tds();
-    private  int cptDepl = 0;
     //Compteur de bloc
     private int cptBloc;
     private TableLocale tableRacine;
@@ -101,14 +100,6 @@ public class Tds {
         return instance;
     }
 
-    /**
-     * Getter du compteur
-     * @return
-     */
-    public int getCptDepl() {
-        return cptDepl;
-    }
-
 
 
     /**
@@ -151,7 +142,7 @@ public class Tds {
      * @return Le deplacement necessaire pour definir toutes nos variables.
      */
     public int getTailleZoneVariable() {
-        return this.cptDepl*(-4);
+        return this.tableLocaleCourante.getTailleZoneVariable();
     }
 
     /**
@@ -268,5 +259,13 @@ public class Tds {
      */
     public int getNumBlocTableLocale(){
         return this.tableLocaleCourante.getNumBloc();
+    }
+
+    /**
+     * Fonction qui retourne le nombre d'entrées entier dans la table local courante
+     * @return
+     */
+    public int getCptDep(){
+        return this.tableLocaleCourante.getCptDepl();
     }
 }

@@ -34,8 +34,9 @@ public class Retourne extends Instruction {
         //recupérer la valeur de retour dans $v0
         code.append("addi $sp,$sp, 4\n");
         code.append("lw $v0, 0($sp)\n");
-        //Mise à jour de la pile
-        code.append("addi $sp,$sp, 8 \n");
+        //Mise à jour de la pile et suppression des variables locals
+        int nbDep=8+4*Tds.getInstance().getCptDep();
+        code.append("addi $sp,$sp, "+nbDep+"\n");
         // Recupérer la base local précedente dans $t8
         code.append("lw $t8, 0($sp)\n");
         //recupérer l'adresse de retour

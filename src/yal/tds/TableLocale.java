@@ -16,7 +16,7 @@ public class TableLocale {
     private int numBloc;
     private TableLocale tablePere;
     private ArrayList<TableLocale> tablesFils;
-    private int cptDepl=0;  //pour le Yal4 afin de déclarer les variables Locals
+    private int cptDepl=0;
     private int nbRetour;
 
     /**
@@ -131,4 +131,11 @@ public class TableLocale {
         this.nbRetour+=1;
     }
 
+    /**
+     * Fonction get CptDepl
+     * @return nombre d'entrées de type entier ajouté dans la table
+     */
+    public int getCptDepl() {
+        return this.cptDepl;
+    }
 }

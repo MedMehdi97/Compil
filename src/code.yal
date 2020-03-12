@@ -2,21 +2,28 @@ programme idf debut
 entier a;
 entier b;
 entier c;
-entier d;
-entier e;
-fonction additionAB ( ) debut
+fonction AB ( ) debut
+entier a;
+entier b;
 a=2;
-b=4;
-d=test2();
-si 1<2 alors retourne 1; sinon retourne 2; finsi
-fin
-fonction test2() debut
-c=5;
-retourne 3;
-fin
-ecrire additionAB();
+b=3;
 ecrire a;
-ecrire d;
+ecrire b;
+retourne B();
+fin
+fonction B() debut
+entier a;
+entier b;
+a=4;
+b=5;
+ecrire a;
+ecrire b;
+retourne 5;
+fin
+a=6;
+b=7;
+c=AB();
+ecrire a;
 ecrire b;
 ecrire c;
 fin

@@ -38,7 +38,9 @@ public class Affectation extends Instruction {
         code.append(this.exp.toMIPS());
         code.append("addi $sp, $sp, 4\n");
         code.append("lw $v0, 0($sp)\n");   //recupération de la valeur à affecter depuis la pile
-        code.append("sw $v0, " + this.idf.getDeplacement() + "($s7)\n");
+        code.append("sw $v0, " + this.idf.getDeplacement());
+        //Variable global ou bien variable local
+        if (this.idf.isMain()==true){code.append("($s7)\n");} else {code.append("($s2)\n");}
         return code.toString();
     }
 }

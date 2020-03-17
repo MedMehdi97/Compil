@@ -20,9 +20,6 @@ public class AppelFonction extends ExpressionArithmetique {
     public void verifier() {
         Symbole s= Tds.getInstance().identifierMain(new EntreeFonction(this.nom,this.noLigne,this.param.size()));
         //Vérifier si la fonction n'appelle pas elle même
-        if(s.getNumBloc()==Tds.getInstance().getNumBlocTableLocale()){
-            Tds.getInstance().ajouterException(new FonctionRecursiveException(this.noLigne," Appel recursive de la Fonction " + this.nom ));
-        }
         for (ExpressionArithmetique e:this.param) {
             e.verifier();
         }

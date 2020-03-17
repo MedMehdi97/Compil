@@ -9,15 +9,9 @@ main :
 
 move $s7,$sp
 
-#reservation de l'espace pour une variable
-addi $sp, $sp, -4
-#reservation de l'espace pour une variable
-addi $sp, $sp, -4
-#reservation de l'espace pour une variable
-addi $sp, $sp, -4
 #Declaration fonction
 j fonctionjmp1
-AB0:
+banane1:
 sw $ra, ($sp)
 addi $sp, $sp, -4
 sw $s2, ($sp)
@@ -26,13 +20,46 @@ li $v0, 1
 sw $v0, ($sp)
 addi $sp, $sp, -4
 move $s2, $sp
+lw $v0, 16($sp)
+sw $v0, 0($s2)
+addi $sp, $sp, -4
+#reservation de l'espace pour une variable
+addi $sp, $sp, -4
+#Affectation
+li $v0, 3
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+sw $v0, -4($s2)
 #Retour de la fonction
-li $v0, 1
+lw $v0, 0($s2)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, -4($s2)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+lw $v0, 0($s2)
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+mult $v0, $t8
+mflo $v0
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp,$sp, 4
 lw $v0, 0($sp)
-addi $sp,$sp, 8
+addi $sp,$sp, 16
 lw $t8, 0($sp)
 addi $sp,$sp, 4
 lw $ra,($sp)
@@ -43,7 +70,7 @@ jr $ra
 fonctionjmp1:
 #Declaration fonction
 j fonctionjmp2
-AB2:
+ananas2:
 sw $ra, ($sp)
 addi $sp, $sp, -4
 sw $s2, ($sp)
@@ -83,86 +110,55 @@ sw $v0, ($sp)
 addi $sp,$sp, -4
 jr $ra
 fonctionjmp2:
-#Declaration fonction
-j fonctionjmp3
-AB3:
-sw $ra, ($sp)
-addi $sp, $sp, -4
-sw $s2, ($sp)
-addi $sp, $sp, -4
-li $v0, 3
-sw $v0, ($sp)
-addi $sp, $sp, -4
-move $s2, $sp
-lw $v0, 24($sp)
-sw $v0, 0($s2)
-addi $sp, $sp, -4
-lw $v0, 24($sp)
-sw $v0, -4($s2)
-addi $sp, $sp, -4
-lw $v0, 24($sp)
-sw $v0, -8($s2)
-addi $sp, $sp, -4
-#Retour de la fonction
-lw $v0, -8($s2)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-lw $v0, -4($s2)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-lw $v0, 0($s2)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
-sw $v0, 0($sp)
-addi $sp, $sp, -4
+
+#Instruction Ecrire 
 #Appel de fonction 
-jal AB0
-addi $sp, $sp, 4
-lw $t8, 0($sp)
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-add $v0, $v0, $t8
+li $v0, 10
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-addi $sp,$sp, 4
+jal banane1
+addi $sp, $sp, 4
 lw $v0, 0($sp)
-addi $sp,$sp, 20
-lw $t8, 0($sp)
-addi $sp,$sp, 4
-lw $ra,($sp)
-move $s2, $t8
+addi $sp, $sp, 4
 sw $v0, ($sp)
 addi $sp,$sp, -4
-jr $ra
-fonctionjmp3:
-#Affectation
-li $v0, 5
+#Appel de fonction 
+li $v0, 1
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal banane1
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+addi $sp, $sp, 4
+sw $v0, ($sp)
+addi $sp,$sp, -4
+addi $sp, $sp, 4
+lw $t8, 0($sp)
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+add $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-sw $v0, -8($s7)
-#Affectation
+move $a0, $v0
+li $v0, 1
+syscall
+
+#Saut de ligne
+li $v0, 4
+la $a0, ln
+syscall
+
+#Instruction Ecrire 
 #Appel de fonction 
 li $v0, 2
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-li $v0, 1
+li $v0, 42
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-jal AB2
+jal ananas2
 addi $sp, $sp, 4
 lw $v0, 0($sp)
 addi $sp, $sp, 8
@@ -170,14 +166,6 @@ sw $v0, ($sp)
 addi $sp,$sp, -4
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-sw $v0, 0($s7)
-
-#Instruction Ecrire 
-lw $v0, 0($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
 move $a0, $v0
 li $v0, 1
 syscall
@@ -186,97 +174,36 @@ syscall
 li $v0, 4
 la $a0, ln
 syscall
-#Affectation
+
+#Instruction Ecrire 
 #Appel de fonction 
 li $v0, 1
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-lw $v0, 0($s7)
+jal banane1
+addi $sp, $sp, 4
+lw $v0, 0($sp)
+addi $sp, $sp, 4
+sw $v0, ($sp)
+addi $sp,$sp, -4
+#Appel de fonction 
+li $v0, 20
 sw $v0, 0($sp)
 addi $sp, $sp, -4
-jal AB2
+li $v0, 20
+sw $v0, 0($sp)
+addi $sp, $sp, -4
+jal ananas2
 addi $sp, $sp, 4
 lw $v0, 0($sp)
 addi $sp, $sp, 8
 sw $v0, ($sp)
 addi $sp,$sp, -4
 addi $sp, $sp, 4
-lw $v0, 0($sp)
-sw $v0, -4($s7)
-
-#Instruction Ecrire 
-lw $v0, -4($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
+lw $t8, 0($sp)
 addi $sp, $sp, 4
 lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-
-#Instruction Ecrire 
-lw $v0, -8($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-#Affectation
-#Appel de fonction 
-li $v0, 3
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 2
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-li $v0, 1
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-jal AB3
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-addi $sp, $sp, 12
-sw $v0, ($sp)
-addi $sp,$sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-sw $v0, -8($s7)
-
-#Instruction Ecrire 
-lw $v0, -8($s7)
-sw $v0, 0($sp)
-addi $sp, $sp, -4
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-move $a0, $v0
-li $v0, 1
-syscall
-
-#Saut de ligne
-li $v0, 4
-la $a0, ln
-syscall
-#Affectation
-#Appel de fonction 
-jal AB0
-addi $sp, $sp, 4
-lw $v0, 0($sp)
-sw $v0, -4($s7)
-
-#Instruction Ecrire 
-lw $v0, -4($s7)
+add $v0, $v0, $t8
 sw $v0, 0($sp)
 addi $sp, $sp, -4
 addi $sp, $sp, 4

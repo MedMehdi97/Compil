@@ -36,7 +36,6 @@ public class DeclarerFonction extends Instruction {
 
     @Override
     public String toMIPS() {
-        int cptParam=0;
         StringBuilder code=new StringBuilder();
         code.append("#Declaration fonction\n");
         // Sauter la fonction lors de l'éxecution du programme
@@ -59,8 +58,7 @@ public class DeclarerFonction extends Instruction {
         //Empiler les paramètres de la fonction si nécessaire
         for (int i=0; i<nbParam; i++){
             code.append("lw $v0, " + (12 + this.nbParam* 4)+ "($sp)\n");
-            code.append("sw $v0, "  + cptParam+ "($s2)\n");
-            cptParam=cptParam-4;
+            code.append("sw $v0, 0($sp)\n");
             code.append("addi $sp, $sp, -4\n");
         }
         //Géneration du code des instructions de la fonction

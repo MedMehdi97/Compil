@@ -163,10 +163,13 @@ ExpressionLogiqueNon  -up-|> ExpressionLogique
 ExpressionLogiqueNon - "1" ExpressionLogique
 
 class Idf {
+   String nom;
+   boolean main;
    Idf(int n, String nom)
    void verifier()
    String toMIPS()
    int getDeplacement()
+   booelan isMain()
 }
 Idf  -up-|> ExpressionArithmetique
 
@@ -187,7 +190,8 @@ ConstanteEntiere  -up-|> Constante
 
 class AppelFonction {
   String nom
-  AppelFonction(int n, String nom)
+  ArrayList<ExpressionArithmetique> param
+  AppelFonction(int n, String nom, ArrayList<ExpressionArithmetique> param)
   void verifier()
   String toMips()
 }
@@ -196,7 +200,9 @@ AppelFonction -up-|> ExpressionArithmetique
 class DeclarerFonction {
    protected String nom
    protected int numBloc
-   DeclarerFonction(int n, String nom, ArbreAbstrait listeInstructions)
+   protected int nbParam
+
+   DeclarerFonction(int n, String nom, ArbreAbstrait listeInstructions, int nbParam)
    void verifier()
    String toMips()
 }

@@ -60,6 +60,10 @@ public class Idf extends ExpressionArithmetique {
         return deplacement;
     }
 
+    /**
+     * Fonction isMain retourne si la variable est golabl ou local
+     * @return
+     */
     public boolean isMain() {
         return main;
     }

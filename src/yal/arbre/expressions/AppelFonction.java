@@ -1,6 +1,5 @@
 package yal.arbre.expressions;
 
-import yal.exceptions.FonctionRecursiveException;
 import yal.tds.Tds;
 import yal.tds.entree.EntreeFonction;
 import yal.tds.symbole.Symbole;
@@ -34,7 +33,7 @@ public class AppelFonction extends ExpressionArithmetique {
         }
         //Appell de la fonction nom+nbParam
         code.append("jal " + this.nom+this.param.size()+ "\n");
-        //Mise à jour de l'appel cas d'une fonction avec paramètres
+        //Depiler les paramètres de la fonction
         if (this.param.size()!=0) {
             //Recupérer le résultat de la fonction dans $v0
             code.append("addi $sp, $sp, 4\n");

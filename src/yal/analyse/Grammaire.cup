@@ -58,7 +58,7 @@ parser code {:
 
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER, LIRE, EGALE, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, FONCTION, RETOURNE, VIRGULE ;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, ENTIER, LIRE, EGALE, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, PAROUVRANTE, PARFERMANTE, FONCTION, RETOURNE, VIRGULE, CROUVRANT, CRFERMANT, POINT, LONGUEUR;
 terminal String    IDF, CSTENTIERE, OPERB, OPERLOGIQUEA, OPERET, OPEROU, PLUS, MOINS, OPEREGALE, OPERNEGALE, NON ;
 
 /* Non terminals used in the grammar section.  */
@@ -125,6 +125,10 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
          |      IDF:i EGALE EXP:e POINTVIRGULE
                 {:  Idf id=new Idf(ileft +1, i);
                     RESULT =new Affectation(ileft +1, id, e);:}
+         |      IDF:i CROUVRANT EXP:e CRFERMANT EGALE EXP:e2 POINTVIRGULE
+                {:
+                   RESULT = new AffectationTab(ileft+1, new IdfTab(ileft+1, i, e), e2);
+                :}
          |      SI EXPLOG:e ALORS LINST:li FINSI
                 {: RESULT =new Condition(eleft+1, e, li); :}
          |      SI EXPLOG:e ALORS LINST:li SINON LINST:lis FINSI
@@ -157,6 +161,14 @@ EXP2   ::= PAROUVRANTE EXP:e PARFERMANTE
                {: RESULT = new Idf(ileft + 1, i) ; :}
          | APPELFONC:a
                  {: RESULT = a; :}
+         | IDF:i CROUVRANT EXP:e CRFERMANT
+               {:
+                  RESULT = new IdfTab(ileft+1, i, e);
+               :}
+         | IDF:i POINT LONGUEUR
+               {:
+                    RESULT = new tabLong(ileft+1, i);
+               :}
                ;
 
 APPELFONC ::= IDF:i PAROUVRANTE PARFERMANTE
@@ -211,7 +223,13 @@ DECL_VAR ::=    ENTIER IDF:i
                    Tds.getInstance().ajouter(e, s);
                    RESULT = new Declarer(ileft + 1, i, e);
                 :}
-                ;
+         |      ENTIER CROUVRANT EXP:ex CRFERMANT IDF:i
+                {: EntreeTableau e = new EntreeTableau(i, ileft + 1);
+                   SymboleTableau s= new SymboleTableau(Tds.getInstance().getZoneVariableTableLocale(), ex);
+                   Tds.getInstance().ajouterTableau(e, s);
+                   RESULT = new DeclarerTableau(ileft + 1, i, ex);
+                :}
+                 ;
 
 DECL_FONC ::=  FONCTIONI IDF:i PARAM:j DEBUT CFONC:li FIN
                {:

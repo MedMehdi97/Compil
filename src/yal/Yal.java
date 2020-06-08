@@ -27,8 +27,13 @@ public class Yal {
             flot.println("vrai : 	.asciiz \"vrai\"");
             flot.println("faux : 	.asciiz \"faux\"");
             flot.println("ErreurDivisionParZero : 	.asciiz \"ErreurDivisionParZero\"");
+            flot.println("ErreurTailleTableau : 	.asciiz \"ErreurTailleTableau\"");
+            flot.println("ErreurIndiceTableau : 	.asciiz \"ErreurIndiceTableau\"");
+            flot.println("ErreurAffectationTailleDesTableauxDifferente : 	.asciiz \"ErreurAffectationTailleDesTableauxDifferente\"");
             flot.println("\n.text\nmain :\n"); // Début du programme MIPS
             flot.println("move $s7,$sp\n");
+            flot.println("move $a0,$sp\n");
+            flot.println("addi $a0, $a0, 4\n");
             flot.println(arbre.toMIPS());
             flot.println("end :\n\n" +"li $v0, 10\n" +"syscall ");//fin du programme MIPS
             flot.close() ;

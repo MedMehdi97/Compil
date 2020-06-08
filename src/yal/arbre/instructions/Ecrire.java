@@ -1,6 +1,7 @@
 package yal.arbre.instructions;
 import yal.arbre.expressions.ExpressionArithmetique;
 import yal.arbre.expressions.ExpressionLogique;
+import yal.exceptions.TableauException;
 import yal.tds.Tds;
 
 public class Ecrire extends Instruction {
@@ -36,7 +37,10 @@ public class Ecrire extends Instruction {
      */
     @Override
     public void verifier() {
-        if (exp!=null) this.exp.verifier(); else this.expL.verifier();
+        if (exp!=null){ this.exp.verifier(); }else {this.expL.verifier();}
+        if (this.exp.isTab()){ //Déclencher une erreur si l'expression est un tableau
+            Tds.getInstance().ajouterException(new TableauException(this.noLigne,"Ecriture Impossible Variable "+this.exp.getNom()+" est un Tableau"));
+        }
     }
 
     /**

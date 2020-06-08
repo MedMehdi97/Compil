@@ -1,5 +1,7 @@
 package yal.tds.symbole;
 
+import yal.arbre.expressions.ExpressionArithmetique;
+
 public class SymboleFonction extends Symbole {
     private int numBloc;
 
@@ -11,6 +13,15 @@ public class SymboleFonction extends Symbole {
         return this.numBloc;
     }
 
+    @Override
+    public ExpressionArithmetique getTaille() {
+        return null;
+    }
+
+    @Override
+    public boolean tableau() {
+        return false;
+    }
 
 
     @Override

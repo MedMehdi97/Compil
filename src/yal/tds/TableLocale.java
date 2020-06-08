@@ -1,5 +1,6 @@
 package yal.tds;
 
+import yal.arbre.expressions.ExpressionArithmetique;
 import yal.exceptions.DoubleDeclarationException;
 import yal.exceptions.FonctionNonDeclareeException;
 import yal.exceptions.VariableNonDeclareeException;
@@ -57,6 +58,27 @@ public class TableLocale {
     }
 
     /**
+     * Fonction d'ajout d'un tableau à la tds
+     * @param e
+     * @param s
+     */
+    public void ajouterTableau(Entree e, Symbole s){
+        for (Entree en: this.table.keySet()){ //Vérifier qu'il n'existe pas une variable qui a le même nom déclaré
+            if ((e.getNom().equals(en.getNom()))&&(en.entreeType()==e.entreeType())){
+                Tds.getInstance().ajouterException(new DoubleDeclarationException(e.getLigne(), " Variable " + e.getNom() + " doublement déclaré"));
+            }
+        }
+        if (s.getTaille().isConstante()==true){
+            //Augmenter le compteur des déplacements avec la taille du tableau
+            this.cptDepl=this.cptDepl+Integer.valueOf(s.getTaille().toString())+1; //cas tableau statique
+        }else {
+           //cas d'un tableau dynamique (Taille  traité)
+           this.cptDepl+=2;
+        }
+        this.table.put(e,s);
+    }
+
+    /**
      * Fonction qui permet d'identifier une entrée
      * @param e
      * @return
@@ -64,14 +86,17 @@ public class TableLocale {
     public Symbole identifier(Entree e){
         for (Entree en: table.keySet()){
             if ((en.getNom().equals(e.getNom()))&&(e.entreeType()==en.entreeType())){
-                //vérifier le nombre de paramètres
+                //vérifier le nombre de paramètres;
                 if (e.getNbParam()==en.getNbParam()){return table.get(en);}
             }
         }
-        if (e.entreeType()==0) {
+
+        if (e.entreeType()==0 ||e.entreeType()==2) {
             if (this.numBloc==0) {
-                //cas ou on est dans le bloc Main la variable n'est pas déclarée
-                Tds.getInstance().ajouterException(new VariableNonDeclareeException(e.getLigne(), "Variable " + e.getNom() + " non déclarée"));
+                if (e.entreeType()==0) {
+                    //cas ou on est dans le bloc Main la variable n'est pas déclarée
+                    Tds.getInstance().ajouterException(new VariableNonDeclareeException(e.getLigne(), "Variable " + e.getNom() + " non déclarée"));
+                }
             }
         }else {
             Tds.getInstance().ajouterException(new FonctionNonDeclareeException(e.getLigne(),"Fonction " + e.getNom() + " non déclarée"));

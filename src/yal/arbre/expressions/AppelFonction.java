@@ -13,6 +13,7 @@ public class AppelFonction extends ExpressionArithmetique {
         super(n);
         this.nom=nom;
         this.param=param;
+        this.constante=false;
     }
 
     @Override

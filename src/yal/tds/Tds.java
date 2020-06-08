@@ -1,6 +1,7 @@
 package yal.tds;
 
 import javafx.scene.control.Tab;
+import yal.arbre.expressions.ExpressionArithmetique;
 import yal.exceptions.AnalyseSemantiqueException;
 import yal.exceptions.DoubleDeclarationException;
 import yal.exceptions.FonctionNonDeclareeException;
@@ -35,6 +36,14 @@ public class Tds {
     private int cptDivZer=1;
     //Compteur de branchement pour les fonctions
     private int cptFonc=1;
+   //Compteur Affectation Tab Tab
+    private int cptAffTab=1;
+    //Compteur Vérification Taille Tableau
+    private int cptTailleTab=1;
+    //Compteur vérificaion indice
+    private int cptTabIndice=1;
+    //VerifTaille2Tableau
+    private int cptVerifTab=1;
 
     /**
      * Constructeur de la classe Tds
@@ -109,6 +118,16 @@ public class Tds {
      */
     public void ajouter(Entree e, Symbole s) {
         this.tableLocaleCourante.ajouter(e,s);
+    }
+
+
+    /**
+     * permet d'ajouter un tableau dans la tds
+     * @param e
+     * @param s
+     */
+    public void ajouterTableau(Entree e, Symbole s){
+                this.tableLocaleCourante.ajouterTableau(e,s);
     }
 
     /**
@@ -200,6 +219,8 @@ public class Tds {
         this.cptCodition+=1;
     }
 
+    public void addCptAffTab(){this.cptAffTab+=1;}
+    public void addCptVerifTab(){this.cptVerifTab+=1;}
     /**
      * getteur de cptNonLog
      * @return
@@ -209,7 +230,7 @@ public class Tds {
     public void addCptNonlog(){
         this.cptNonLog+=1;
     }
-
+    public void addCptIndice(){this.cptTabIndice+=1;}
     /**
      * retourne cptBoucle
      * @return
@@ -248,6 +269,7 @@ public class Tds {
     public void addCptFonc(){
         this.cptFonc+=1;
     }
+    public void addCptTailleTab(){this.cptTailleTab+=1;}
 
     public int getCptFonc() {
         return cptFonc;
@@ -267,5 +289,25 @@ public class Tds {
      */
     public int getCptDep(){
         return this.tableLocaleCourante.getCptDepl();
+    }
+
+    /**
+     * Fonction qui retourne le compteur pour les branchemen d'une affectation Tab Tab
+     * @return
+     */
+    public int getCptAffTab() {
+        return this.cptAffTab;
+    }
+
+    public int getCptTailleTab() {
+        return cptTailleTab;
+    }
+
+    public int getCptTabIndice() {
+        return cptTabIndice;
+    }
+
+    public int getCptVerifTab() {
+        return cptVerifTab;
     }
 }

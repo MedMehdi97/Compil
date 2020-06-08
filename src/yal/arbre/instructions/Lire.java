@@ -2,6 +2,8 @@ package yal.arbre.instructions;
 
 import yal.arbre.expressions.Expression;
 import yal.arbre.expressions.Idf;
+import yal.exceptions.TableauException;
+import yal.tds.Tds;
 
 public class Lire extends Instruction{
     protected Idf idf ;
@@ -22,6 +24,9 @@ public class Lire extends Instruction{
     @Override
     public void verifier() {
          this.idf.verifier();
+         if (this.idf.isTab()){ //Déclenche une exception si l'idf est un tableau
+             Tds.getInstance().ajouterException(new TableauException(this.noLigne,"Lecture Impossible Variable "+this.idf.getNom()+" est un tableau"));
+         }
     }
 
     /**

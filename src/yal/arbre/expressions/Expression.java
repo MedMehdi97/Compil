@@ -28,5 +28,19 @@ public abstract class Expression extends ArbreAbstrait {
         this.expD = expD;
         this.oper = oper;
     }
-
+    public boolean isTab() {
+        return false;
+    }
+    public boolean isDyn() {
+        return false;
+    }
+    public boolean isMain(){
+        return false;
+    }
+    public int getDeplacement(){
+        return 0;
+    }
+    public String getNom(){
+        return "";
+    }
 }

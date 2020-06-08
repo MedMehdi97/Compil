@@ -19,4 +19,8 @@ public class ConstanteEntiere extends Constante {
         return code.toString();
     }
 
+    @Override
+    public boolean isConstante() {
+        return true;
+    }
 }

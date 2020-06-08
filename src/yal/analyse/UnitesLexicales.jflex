@@ -61,6 +61,7 @@ operateurCompA = (<|>)
 "fintantque"           { return symbol(CodesLexicaux.FINTANTQUE); }
 "fonction"             { return symbol(CodesLexicaux.FONCTION); }
 "retourne"             { return symbol(CodesLexicaux.RETOURNE); }
+"longueur"             { return symbol(CodesLexicaux.LONGUEUR); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 "="                    { return symbol(CodesLexicaux.EGALE); }
@@ -76,8 +77,11 @@ operateurCompA = (<|>)
 "("                    { return symbol(CodesLexicaux.PAROUVRANTE); }
 ")"                    { return symbol(CodesLexicaux.PARFERMANTE); }
 
-","                    { return symbol(CodesLexicaux.VIRGULE); }
+"["                    { return symbol(CodesLexicaux.CROUVRANT); }
+"]"                    { return symbol(CodesLexicaux.CRFERMANT); }
 
+","                    { return symbol(CodesLexicaux.VIRGULE); }
+"."                    { return symbol(CodesLexicaux.POINT); }
 
 {operateurCompA}        { return symbol(CodesLexicaux.OPERLOGIQUEA, yytext()); }
 
@@ -93,4 +97,3 @@ operateurCompA = (<|>)
 {commentaire}      { }
 
 .                      { throw new AnalyseLexicaleException(yyline, yycolumn, yytext()) ; }
-

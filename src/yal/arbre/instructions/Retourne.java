@@ -2,6 +2,7 @@ package yal.arbre.instructions;
 
 import yal.arbre.expressions.ExpressionArithmetique;
 import yal.exceptions.RetourneException;
+import yal.exceptions.TableauException;
 import yal.tds.Tds;
 
 public class Retourne extends Instruction {
@@ -24,6 +25,9 @@ public class Retourne extends Instruction {
         }
         Tds.getInstance().getTableLocaleCourante().addNbRetour();
         this.exp.verifier();
+        if (this.exp.isTab()){ //Déclencher une erreur si l'expression est un nom de tableau
+            Tds.getInstance().ajouterException(new TableauException(this.noLigne,"Retourne Impossible Variable "+this.exp.getNom()+" est un tableau"));
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import yal.exceptions.DivisionParZeroException;
 import yal.tds.Tds;
 
 public class ExpressionArithmetique extends Expression {
+    boolean constante=false;
     /**
      * Constructeur d'une affectation (constante entière ou une variable)
      * @param n
@@ -79,4 +80,8 @@ public class ExpressionArithmetique extends Expression {
     public String toString(){
         return "";
     }
+    public boolean isConstante(){
+        return false;
+    }
+
 }

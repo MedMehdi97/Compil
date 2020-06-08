@@ -8,7 +8,8 @@ public class Idf extends ExpressionArithmetique {
     private String nom;
     private int deplacement;
     private boolean main; //Variable pour basculer entre $s7 et $s2 local et global
-
+    private boolean tab; //variable permet de diffirencer les tableau
+    private boolean dyn;
     /**
      * Constructeur de la classe Idf
      * @param n Numéro de ligne
@@ -35,6 +36,10 @@ public class Idf extends ExpressionArithmetique {
             }
 
             this.deplacement = s.getDeplacement();
+            this.tab=s.tableau();
+            if (this.tab==true) {
+                this.dyn = !s.getTaille().isConstante();
+            }
     }
 
     /**
@@ -44,11 +49,17 @@ public class Idf extends ExpressionArithmetique {
     @Override
     public String toMIPS() {
         StringBuilder code=new StringBuilder("");
-        code.append("lw $v0, " + this.deplacement); //chargement de la valeur dans $v0
-        //ajouter $s7 si global ou $s2 si local
-        if (main==true){code.append("($s7)\n");} else {code.append("($s2)\n");}
-        code.append("sw $v0, 0($sp)\n");  //stockage de la valeur dans la pile
-        code.append("addi $sp, $sp, -4\n");
+        if (this.tab==false) {
+            code.append("lw $v0, " + this.deplacement); //chargement de la valeur dans $v0
+            //ajouter $s7 si global ou $s2 si local
+            if (main == true) {
+                code.append("($s7)\n");
+            } else {
+                code.append("($s2)\n");
+            }
+            code.append("sw $v0, 0($sp)\n");  //stockage de la valeur dans la pile
+            code.append("addi $sp, $sp, -4\n");
+        }
         return code.toString();
     }
 
@@ -66,5 +77,29 @@ public class Idf extends ExpressionArithmetique {
      */
     public boolean isMain() {
         return main;
+    }
+
+    /**
+     * Permet d'identifier un tableau
+     * @return
+     */
+    public boolean isTab(){
+        return this.tab;
+    }
+
+    /**
+     * Permet d'identifier un tableau dynamique ou statique
+     * @return
+     */
+    public boolean isDyn() {
+        return this.dyn;
+    }
+
+    /**
+     * Retourne le nom de l'idf
+     * @return
+     */
+    public String getNom() {
+        return nom;
     }
 }
